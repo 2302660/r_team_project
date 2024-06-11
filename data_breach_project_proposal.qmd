@@ -1,0 +1,45 @@
+---
+website:
+  title: "Team Project Proposal"
+  
+format:
+  html:
+    theme: cosmo
+    css: main.css
+    embed-resources: true
+    
+editor: visual
+---
+
+# Team Project Proposal
+
+::: {.lead .subtitle}
+Visualizing Data Breaches Over Time
+:::
+
+::: {#authors_container}
+::: {#author-title}
+Authors
+:::
+
+1.  Heng Yu Xin
+
+2.  Javier Si Zhao Hong
+
+3.  Tan Guan Hong
+
+4.  Hong Ziyang
+
+5.  Abdul Haliq Bin Abdul Rahim
+
+6.  See Toh Ming Xuan Axel
+:::
+
+::: section
+For this doucment, the following packages are required:
+
+```{r}
+library(conflicted)  
+library(tidyverse)
+```
+:::
