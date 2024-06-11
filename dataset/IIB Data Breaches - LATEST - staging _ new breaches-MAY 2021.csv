@@ -1,0 +1,43 @@
+organisation,alternative name,records lost,year   ,date,story,sector,method,interesting story,data sensitivity,displayed records,,source name,1st source link,2nd source link,ID
+,,"(use 3m, 4m, 5m or 10m to approximate unknown figures) ",year story broke,,,"web
+healthcare
+app
+retail
+gaming
+transport
+financial
+tech
+government
+telecoms
+legal
+media
+academic
+energy
+military","poor security
+hacked
+oops!
+lost device 
+inside job",,"1. Just email address/Online information 
+2 SSN/Personal details 
+3 Credit card information 
+4 Health & other personal records 
+5 Full details","=IF(C3>100000000,C3,"")",,,,,
+Twitch,,"10,000,000",2021,Oct 2021,"Full source code breach of the streaming gaming site revealed a trove of internal data & documents including core config packages, devtools, and payments to top streamers. ",gaming,hacked,y,4,unknown,,BBC,https://www.bbc.co.uk/news/technology-58817658,,395
+Syniverse,,"500,000,000",2021,Sep 2021,"""A company that is a critical part of the global telecommunications infrastructure used by AT&T, T-Mobile, Verizon and several others around the world such as Vodafone and China Mobile, quietly disclosed that hackers were inside its systems for years, impacting more than 200 of its clients and potentially millions of cellphone users worldwide.""",telecoms,hacked,,4,unknown,,Vice,https://www.vice.com/en/article/z3xpm8/company-that-routes-billions-of-text-messages-quietly-says-it-was-hacked,,394
+Pandora Papers,,"11,900,000",2021,Oct 2021,"Millions of documents reveal offshore deals and assets of more than 100 billionaires, 30 world leaders and 300 public officials",government,hacked,y,4,,,Guardian,https://www.theguardian.com/news/2021/oct/03/pandora-papers-biggest-ever-leak-of-offshore-data-exposes-financial-secrets-of-rich-and-powerful,,393
+Neiman Marcus,,"4,600,000",2021,Sep 2021,"Occurred sometime in May 2020 after ""an unauthorized party"" obtained the personal information of some Neiman Marcus customers from their online accounts.",retail,hacked,,3,,,Ars Technica,https://arstechnica.com/information-technology/2021/10/neiman-marcus-data-breach-impacts-4-6-million-customers/,,392
+Epik,,"15,000,000",2021,Sep 2021,"An Internet-services company for concealing online identities, popular with the far right ",retail,hacked,y,5,,,Ars Technica,https://arstechnica.com/information-technology/2021/09/epik-data-breach-impacts-15-million-users-including-non-customers/,,391
+Thailand visitors,,"100,000,000",2021,Sep 2021,Any foreigner who has travelled to Thailand in the last decade ‘might have had their information exposed’,government,poor security ,,2,"100,000,000",,South China Morning Post,https://www.scmp.com/news/asia/southeast-asia/article/3149475/details-some-100-million-visitors-thailand-exposed-online,,390
+T-Mobile ,,"40,000,000",2021,Aug 2021,"Exposed the names, date of birth, Social Security number and driver’s license/ID information of more than 40 million current, former or prospective customers who applied for credit with the company.",telecoms,hacked,,3,,,Krebson Security,https://krebsonsecurity.com/2021/08/t-mobile-breach-exposed-ssn-dob-of-40m-people/,,389
+Contact tracing data,,"38,000,000",2021,Aug 2021,"A thousand web apps mistakenly exposed 38 million records on the open internet, including data from a number of Covid-19 contact tracing platforms, vaccination sign-ups, job application portals, and employee databases.",telecoms,hacked,,3,"38,000,000",,Wired,https://www.wired.com/story/microsoft-power-apps-data-exposed/,,388
+Estonian gov,,"280,000",2021,Jul 2021,"A hacker was able to obtain over 280,000 personal identity photos following an attack on the state information system last Friday.",government,hacked,,4,,,News ERR,https://news.err.ee/1608291072/hacker-downloads-close-to-300-000-personal-id-photos,,387
+Guntrader,UK firearms sales website,"111,000",2021,Jul 2021,"Criminals have hacked into a Gumtree-style website used for buying and selling firearms, making off with a 111,000-entry database containing names, mobile phone numbers, email addresses, user geolocation data, and more including bcrypt-hashed passwords used by gun shops across the UK.",retail,hacked,,2,,,The Register,https://www.theregister.com/2021/07/23/guntrader_hacked_111k_users_sql_database/,,386
+Linkedin,,"700,000,000",2021,Jul 2021,"The hacker appears to have misused the official LinkedIn API to scrape the data, the same method used in a similar breach back in April. User details, but no passwords.",web ,hacked,,1,"700,000,000",,9 to 5 mac,https://9to5mac.com/2021/06/29/linkedin-breach/,,385
+VW,,"3,300,000",2021,Jun 2021,"Phone numbers, email addresses and some sensitive credit data. Nearly all those impacted were current or potential customers of Audi, one of the German automaker's luxury brands",transport,hacked,,2,,,Reuters,https://www.reuters.com/business/autos-transportation/vw-says-data-breach-vendor-impacted-33-million-people-north-america-2021-06-11/,,384
+MacDonalds,,"10,000,000",2021,Jun 2021,Unknown detail,retail,hacked,,2,unknown,,Wall St Journal,https://www.wsj.com/articles/mcdonalds-hit-by-data-breach-in-south-korea-taiwan-11623412800,,383
+Air India,,"4,500,000",2021,May 2021,"Passenger’s name, date of birth, contact information, passport information, ticket information, frequent flyer data and credit card information.",transport,hacked,,2,,,Indian Express,https://indianexpress.com/article/explained/air-india-sita-data-breach-explained-7325501/,,382
+Omiai dating app,Japanese dating app,"1,710,000",2021,May 2021,"Addresses and dates of birth from identification, including passports, drivers’ licenses and health insurance cards, provided to the company.",app,hacked,,2,,,Japan Times,https://www.japantimes.co.jp/news/2021/05/22/business/tech/omiai-dating-app-hack-japan/,,381
+Amazon Reviews,,"13,124,962",2021,May 2021,Database exposing an organized fake reviews scam affecting Amazon. The server contained a treasure trove of direct messages between Amazon vendors and customers willing to provide fake reviews in exchange for free products,web,poor security ,y,2,,,Safety Detectives,https://www.safetydetectives.com/blog/amazon-reviews-leak-report/,,380
+Peloton,,"3,000,000",2021,May 2021,,tech,poor security ,,2,,,Ars Technica,https://arstechnica.com/gadgets/2021/05/peloton-takes-3-months-to-fix-flaw-that-exposed-users-private-information/#p3,,379
+Digital Ocean,,"10,000,000",2021,Apr 2021,,tech,poor security ,,,unknown,,Tech Crunch,https://techcrunch.com/2021/04/28/digitalocean-customer-billing-data-breach/,,378
+Park Mobile,mobile parking app,"21,000,000",2021,Apr 2021,"Customer email addresses, dates of birth, phone numbers, license plate numbers, hashed passwords and mailing addresses.",transport,hacked,,2,,,Krebson Security,https://krebsonsecurity.com/2021/04/parkmobile-breach-exposes-license-plate-data-mobile-numbers-of-21m-users/,,377

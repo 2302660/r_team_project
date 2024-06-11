@@ -1,0 +1,46 @@
+organisation,alternative name,records lost,year   ,date,story,sector,method,interesting story,data sensitivity,displayed records,,source name,1st source link,2nd source link,ID
+,,"(use 3m, 4m, 5m or 10m to approximate unknown figures) ",year story broke,,,"web
+healthcare
+app
+retail
+gaming
+transport
+financial
+tech
+government
+telecoms
+legal
+media
+academic
+energy
+military","poor security
+hacked
+oops!
+lost device 
+inside job",,"1. Just email address/Online information 
+2 SSN/Personal details 
+3 Credit card information 
+4 Health & other personal records 
+5 Full details","=IF(C3>100000000,C3,"")",,,,,
+Dubai Real Estate Leak,,"800,000",2022,May 2022,"Data leak exposes how criminals, officials, and sanctioned politicians poured money into Dubai real estate including more than 100 members of Russia's political elite, public officials, or businesspeople close to the Kremlin, as well as dozens of Europeans implicated in money laundering and corruption",financial,inside job,y,1,"800,000",,E24,https://e24.no/internasjonal-oekonomi/i/Bj97B0/dubai-uncovered-data-leak-exposes-how-criminals-officials-and-sanctioned-politicians-poured-money-into-dubai-real-estate,,409
+Heroku,,"50,000",2022,Apr 2022,"A compromised token was used by attackers to exfiltrate customers' hashed and salted passwords from ""a database."" on the Salesforce-owned cloud platform.",tech,hacked,,2,"50,000*",,Bleeping Computer,https://www.bleepingcomputer.com/news/security/heroku-admits-that-customer-credentials-were-stolen-in-cyberattack/,,410
+Mailchimp,,"106,586",2022,Apr 2022,Hackers gained access to internal customer support and account management tools of the email marketing company to steal audience data and conduct phishing attacks.,tech,hacked,,1,"106,586",,Bleeping Computer,https://www.bleepingcomputer.com/news/security/hackers-breach-mailchimps-internal-tools-to-target-crypto-customers/,,411
+PayHere,,"1,580,249",2022,Mar 2022,"Sri Lankan payment gateway PayHere suffered a data breach exposing more than 65GB of payment records including over 1.5M unique email addresses. (IP and physical addresses, names, phone numbers, purchase histories and partially obfuscated credit card data (card type, first 6 and last 4 digits plus expiry date).",financial,hacked,,3,"1,500,000",,Pay Here,https://blog.payhere.lk/ensuring-integrity-on-payhere-cybersecurity-incident/,,412
+CDEK,,"18,218,203",2022,Mar 2022,"UNVERIFIED. Russian courier service CDEK was hacked by Ukrainian hacker group ""IT Army"" - including 19M unique email addresses along with names and phone numbers. ",retail,hacked,,3,"19,000,000",,Have I Been Pwned,https://twitter.com/haveibeenpwned/status/1504343470072549377?lang=en,,413
+Washington State Dpt of Licensing,,"257,000",2022,Feb 2022,The Washington State Department of Licensing said the personal information of potentially millions of licensed professionals may have been exposed after it detected suspicious activity on its online licensing system.,government,hacked,,3,"257,000",,Seattle Times,https://www.seattletimes.com/business/breach-at-state-licensing-agency-may-have-exposed-data-from-1000s-of-professionals/,,414
+Red Cross,,"500,000",2022,Jan 2022,"A network intrusion at the International Committee for the Red Cross (ICRC) in January led to the theft of personal information on more than 500,000 people receiving assistance from the group. KrebsOnSecurity has learned that the email address used by a cybercriminal actor who offered to sell the stolen ICRC data also was used to register multiple domain names the FBI says are tied to a sprawling media influence operation originating from Iran.",NGO,hacked,,4,"500,000",,Arsetechnia,https://arstechnica.com/information-technology/2022/01/red-cross-hack-compromises-the-personal-data-of-515k-highly-vulnerable-people/,,415
+Open Subtitles,,"100,000",2022,Jan 2022,,web,hacked,,1,unknown,,Open Subtitles,https://forum.opensubtitles.org/viewtopic.php?t=17685,,416
+FlexBooker,,"3,700,000",2022,Jan 2022,appointment scheduling service,web,hacked,,3,"3,700,000",,Bleeping Computer,https://www.bleepingcomputer.com/news/security/flexbooker-discloses-data-breach-over-37-million-accounts-impacted/,,417
+LINE Pay,,"133,000",2021,Dec 2021,,financial,poor security ,,2,"133,000",,The Register,https://www.theregister.com/2021/12/07/line_pay_leaks_around_133000/,,399
+Robinhood,,"5,000,937",2021,Nov 2021,"a malicious hacker had socially engineered a customer service representative over the phone November 3 to get access to customer support systems. That allowed the hacker to obtain customer names and email addresses, but also the additional full names, dates of birth and ZIP codes of 310 customers.",financial,hacked,,2,"5,000,000",,Tech Crunch,https://techcrunch.com/2021/11/09/robinhood-data-breach/?guccounter=1,,400
+GoDaddy,,"1,200,000",2021,Nov 2021,Security Incident Affecting Managed WordPress Servic,web,hacked,,1,"1,200,000",,SEC,https://techcrunch.com/2021/11/09/robinhood-data-breach/?guccounter=1,,401
+Travelio,,"471,376",2021,Nov 2021,"The Indonesian real estate website Travelio suffered a data breach of over 470k customer accounts. The data included email addresses, names, password hashes, phone numbers and for some accounts, dates of birth, physical address and Facebook auth tokens. ",misc,hacked,,2,"470,000",,HaveIBeenPwned,https://www.riskbasedsecurity.com/2021/12/14/dark-web-roundup-november-2021/,,402
+Acer,,"3,000,000",2021,Oct 2021,,tech,hacked,,1,"""millions""",,Hot Hardware,https://hothardware.com/news/acer-confirms-hacked-again-60gb-stolen-customer-data,,403
+Brewdog,,"200,000",2021,Oct 2021,"BrewDog, one of the world's largest craft beer brewers, has exposed personally identifiable information (PII) belonging to more than 200,000 of its shareholders and customers,",retail,poor security,,1,"200,000",,Tech Radar,https://www.techradar.com/news/brewdog-exposes-data-of-200000-customers-and-shareholders,,404
+T-Mobile,,"40,000,000",2021,Aug 2021,"T-Mobile warned Monday that a data breach has exposed the names, date of birth, Social Security number and driver’s license/ID information of more than 40 million current, former or prospective customers. The acknowledgment came less than 48 hours after millions of the stolen T-Mobile customer records went up for sale in the cybercrime underground.",telecoms,hacked,,1,"40,000,000",,Tech Crunch,https://techcrunch.com/2021/08/18/t-mobile-says-at-least-47m-current-and-former-customers-affected-by-data-breach/,,405
+Nvidia,,"100,000",2021,Mar 2021,,tech,hacked,,2,unknown,,CNN Business,https://edition.cnn.com/2022/03/01/tech/nvidia-information-leak/,https://it.slashdot.org/story/22/03/01/1523248/nvidia-says-employee-company-information-leaked-online-after-cyber-attack?utm_source=feedly1.0mainlinkanon&utm_medium=feed,406
+Ubiquiti,,"100,000",2021,Jan 2021,,tech,inside job,,2,unknown,,Bit Defender,https://www.bitdefender.com/blog/hotforsecurity/ubiquiti-users-told-to-change-their-passwords-following-security-breach,,407
+Okta,,"100,000",2021,Jan 2021,Identity and access management provider Okta,tech,hacked,,1,unknown,,The Verge,https://www.theverge.com/2022/4/20/23034360/okta-lapsus-hack-investigation-breach-25-minutes,https://twitter.com/BillDemirkapi/status/1508527487655067660/,408
+Royal Enfield,,"420,873",2020, Jan 2020,"Motorcycle maker Royal Enfield left a database publicly exposed that resulted in the inadvertent publication of over 400k customers. (Email and physical addresses, names, motorcycle information, social media profiles, passwords, and other personal information)",transport,poor security,,3,"420,000",,The Quint,https://www.thequint.com/news/india/royal-enfield-exposed-database-containing-450000-customer-data-cyber-security-expert,,398
+Avvo,,"4,101,101",2019,Dec 2019,"A data breach of the lawyer directory service released 4.1M unique email addresses alongside SHA-1 hashes, most likely representing user passwords. ",legal,hacked,,1,"4,100,000",,HaveIBeenPwned,https://www.troyhunt.com/breach-disclosure-blow-by-blow-heres-why-its-so-hard/,,396
+Aimware,,"305,470",2019,May 2019,"Video game cheats website ""Aimware"" suffered a data breach of subscribers' personal information (email and IP addresses, usernames, forum posts, private messages, website activity and passwords stored as salted MD5 hashes)",gaming,hacked,,3,"305,000",,HaveIBeenPwned,,,397
