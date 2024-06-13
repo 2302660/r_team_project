@@ -1,17 +1,16 @@
 ---
-website:
-  title: "Team Project Proposal"
-  
-format:
-  html:
-    theme: cosmo
-    css: main.css
-    embed-resources: true
-    
-editor: visual
----
+title: "Team Project Proposal"
 
-# Team Project Proposal
+format: 
+  html: 
+      toc: true
+      toc-depth: 2
+      number-sections: true
+      toc-location: left
+      embed_resources: true
+      page-layout: full
+      theme: cosmo
+---
 
 ::: {.lead .subtitle}
 Visualizing Data Breaches Over Time
