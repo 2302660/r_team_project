@@ -75,11 +75,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-full toc-left">
 <div id="quarto-sidebar-toc-left" class="sidebar toc-left">
-  
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul class="collapse">
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">1</span> Introduction</a>
+  <ul class="collapse">
+  <li><a href="#background-and-significance" id="toc-background-and-significance" class="nav-link" data-scroll-target="#background-and-significance"><span class="header-section-number">1.1</span> Background and Significance</a></li>
+  <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives"><span class="header-section-number">1.2</span> Objectives</a></li>
+  <li><a href="#data-source" id="toc-data-source" class="nav-link" data-scroll-target="#data-source"><span class="header-section-number">1.3</span> Data Source</a></li>
+  </ul></li>
+  <li><a href="#original-visualization-assessment" id="toc-original-visualization-assessment" class="nav-link" data-scroll-target="#original-visualization-assessment"><span class="header-section-number">2</span> Original Visualization Assessment</a>
+  <ul class="collapse">
+  <li><a href="#description-of-the-visualization" id="toc-description-of-the-visualization" class="nav-link" data-scroll-target="#description-of-the-visualization"><span class="header-section-number">2.1</span> Description of the Visualization</a></li>
+  <li><a href="#critical-assessment" id="toc-critical-assessment" class="nav-link" data-scroll-target="#critical-assessment"><span class="header-section-number">2.2</span> Critical Assessment</a></li>
+  </ul></li>
+  <li><a href="#proposed-enhancements" id="toc-proposed-enhancements" class="nav-link" data-scroll-target="#proposed-enhancements"><span class="header-section-number">3</span> Proposed Enhancements</a></li>
+  <li><a href="#data-cleaning-and-transformation" id="toc-data-cleaning-and-transformation" class="nav-link" data-scroll-target="#data-cleaning-and-transformation"><span class="header-section-number">4</span> Data Cleaning and Transformation</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">5</span> Conclusion</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">6</span> References</a></li>
+  </ul>
+</nav>
 </div>
 <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
 </div>
-<main class="content column-page" id="quarto-document-content">
+<main class="content column-page-right" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -88,7 +108,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<div class="quarto-title-meta column-page">
+<div class="quarto-title-meta column-page-right">
 
     
   
@@ -130,6 +150,256 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 ✔ purrr     1.0.2     </code></pre>
 </div>
 </div>
+</section>
+<section id="introduction" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
+<section id="background-and-significance" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="background-and-significance"><span class="header-section-number">1.1</span> Background and Significance</h2>
+<p>The surge in digital data transmission has amplified the susceptibility of information systems to security breaches. Our project utilizes the dataset from Information is Beautiful on the world’s biggest data breaches to augment the existing visualization.</p>
+</section>
+<section id="objectives" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="objectives"><span class="header-section-number">1.2</span> Objectives</h2>
+<p>We plan to add features to the visualization, normalize the data and run comparative analyses, and develop models to predict future breaches. Our objective is to transform this visualization into a more dynamic and analytical tool that not only reflects previous data breaches but also provides insights into potential future trends.</p>
+</section>
+<section id="data-source" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="data-source"><span class="header-section-number">1.3</span> Data Source</h2>
+<p>The dataset is obtained from Information is Beautiful, which contains information on the world’s biggest data breaches. The dataset includes the date of the breach, the organization involved, the method of the breach, the number of records lost, and the sector of the organization.</p>
+</section>
+</section>
+<section id="original-visualization-assessment" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Original Visualization Assessment</h1>
+<section id="description-of-the-visualization" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="description-of-the-visualization"><span class="header-section-number">2.1</span> Description of the Visualization</h2>
+<p>The original visualization, shown in <a href="#fig-Figure_1" class="quarto-xref">Figure&nbsp;1</a>, is a compelling graphical representation that uses varying bubble sizes and colours to depict the magnitude and frequency of major data breaches impacting organizations worldwide. Organized chronologically and segmented by year, the visualization offers a clear timeline of data breaches, providing immediate visual insight into the evolution and escalation of data security issues over time.</p>
+<div id="fig-Figure_1" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Figure_1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="original_visualization.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-Figure_1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: This bubble chart illustrates the scale and impact of major global data breaches, categorized by the organization and number of records lost.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="critical-assessment" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="critical-assessment"><span class="header-section-number">2.2</span> Critical Assessment</h2>
+<p>The original visualization excels in several areas but also presents certain limitations that could be addressed to enhance its utility and interpretability:</p>
+<p><strong>Strengths</strong></p>
+<ul>
+<li><p><strong>Visual Impact:</strong> The use of large, coloured bubbles immediately draws attention and effectively communicates the relative scale of data breaches.</p></li>
+<li><p><strong>Interactivity:</strong> Interactive elements allow users to filter breaches by year and type, facilitating a customized exploration of the data.</p></li>
+<li><p><strong>Information Density:</strong> A significant amount of information is compactly displayed, providing quick insights into data breaches across different industries and regions.</p></li>
+</ul>
+<p><strong>Weaknesses</strong></p>
+<ul>
+<li><p><strong>Complexity and Clarity:</strong> While the visualization holds a wealth of information, its complexity can be overwhelming at first glance, potentially confusing users unfamiliar with interpreting dense graphical data.</p></li>
+<li><p><strong>Contextual Depth:</strong> The visualization lacks contextual layers that could provide deeper insights, such as the financial impact of breaches, the nature of data compromised, or the aftermath in terms of regulatory actions and recovery.</p></li>
+<li><p><strong>Predictive Insights:</strong> There is an absence of analytical features that could predict trends or identify patterns beyond the descriptive data presented. This limits the visualizations utility for forecasting and strategic planning.</p></li>
+</ul>
+</section>
+</section>
+<section id="proposed-enhancements" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Proposed Enhancements</h1>
+<p><strong>1. Normalization Features</strong></p>
+<p>Incorporating normalization features to compare breaches based on the size of the organization or the number of users impacted could provide a more nuanced understanding of each incident’s significance.</p>
+<p><strong>2. Trend Analysis</strong></p>
+<p>Adding trend lines or heat maps to visualize the frequency and severity of breaches over time would aid in identifying underlying patterns and potential vulnerabilities in data security practices.</p>
+<p><strong>3. Enhanced Interactivity</strong></p>
+<p>Expanding the interactivity to include more customizable filters, such as by sector or breach method, could allow users to derive more specific insights tailored to their interests or concerns.</p>
+<hr>
+<p>These enhancements would not only address the current limitations but also significantly augment the visualizations value as a tool for comprehensive risk assessment and strategic planning in cybersecurity.</p>
+</section>
+<section id="data-cleaning-and-transformation" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Data Cleaning and Transformation</h1>
+<p>Utilizing <code>tidyverse</code> libraries, we will perform a series of data cleaning and transformation steps to prepare the data for analysis and visualization. These steps are crucial to ensure the accuracy and usability of the data.</p>
+<p><strong>1. Loading and Inspecting Data:</strong> First, we load the data using <code>readr</code> and inspect it for any inconsistencies or missing values.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the data</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>breaches <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"dataset/IIB Data Breaches - LATEST - breaches.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>New names:
+Rows: 489 Columns: 16
+── Column specification
+──────────────────────────────────────────────────────── Delimiter: "," chr
+(14): organisation, alternative name, records lost, year, date, story, s... dbl
+(1): ID lgl (1): ...12
+ℹ Use `spec()` to retrieve the full column specification for this data. ℹ
+Specify the column types or set `show_col_types = FALSE` to quiet this message.
+• `` -&gt; `...12`</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove 1st row as it contains unnecessary information</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>breaches <span class="ot">&lt;-</span> breaches[<span class="sc">-</span><span class="dv">1</span>,]</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspect the data</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(breaches)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 488
+Columns: 16
+$ organisation        &lt;chr&gt; "Kaiser Permanente", "Ticketmaster", "Stanford Uni…
+$ `alternative name`  &lt;chr&gt; NA, NA, NA, NA, "FBCS", NA, NA, NA, NA, NA, NA, NA…
+$ `records lost`      &lt;chr&gt; "13,400,000", "560,000,000", "27,000", "500,000", …
+$ year                &lt;chr&gt; "2024", "2024", "2023", "2024", "2024", "2024", "2…
+$ date                &lt;chr&gt; "Apr 24", "Jun 24", "May 23", "May 24", "Feb 24", …
+$ story               &lt;chr&gt; "A leading U.S. healthcare organization transmitte…
+$ sector              &lt;chr&gt; "health", "media", "academic", "tech", "tech", "fi…
+$ method              &lt;chr&gt; "oops!", "hacked", "hacked", "hacked", "hacked", "…
+$ `interesting story` &lt;chr&gt; NA, "y", NA, NA, NA, NA, NA, NA, NA, "y", NA, NA, …
+$ `data sensitivity`  &lt;chr&gt; "3", "3", "2", "2", "2", "3", "1", "2", "2", "2", …
+$ `displayed records` &lt;chr&gt; NA, "560m", NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ ...12               &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ `source name`       &lt;chr&gt; "Bleeping Computer", "BBC", "Slashdot", "Bleeping …
+$ `1st source link`   &lt;chr&gt; "https://restoreprivacy.com/data-breach-at-kaiser-…
+$ `2nd source link`   &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ ID                  &lt;dbl&gt; 492, 491, 490, 489, 488, 487, 486, 485, 484, 483, …</code></pre>
+</div>
+</div>
+<p><strong>2. Handling Missing Values:</strong> We identify and address any missing values, particularly in critical fields like ‘Records Lost’ and ‘Year’. ::: {.cell}</p>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Standardize column names to remove spaces and convert to snake_case</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>breaches <span class="ot">&lt;-</span> breaches <span class="sc">|&gt;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename_with</span>(<span class="sc">~</span> <span class="fu">gsub</span>(<span class="st">" "</span>, <span class="st">"_"</span>, .)) <span class="sc">|&gt;</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename_with</span>(tolower)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Check names again to confirm changes</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(breaches)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "organisation"      "alternative_name"  "records_lost"     
+ [4] "year"              "date"              "story"            
+ [7] "sector"            "method"            "interesting_story"
+[10] "data_sensitivity"  "displayed_records" "...12"            
+[13] "source_name"       "1st_source_link"   "2nd_source_link"  
+[16] "id"               </code></pre>
+</div>
+<p>:::</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check for missing values</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(breaches)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> organisation       alternative_name   records_lost           year          
+ Length:488         Length:488         Length:488         Length:488        
+ Class :character   Class :character   Class :character   Class :character  
+ Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+                                                                            
+                                                                            
+                                                                            
+     date              story              sector             method         
+ Length:488         Length:488         Length:488         Length:488        
+ Class :character   Class :character   Class :character   Class :character  
+ Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+                                                                            
+                                                                            
+                                                                            
+ interesting_story  data_sensitivity   displayed_records   ...12        
+ Length:488         Length:488         Length:488         Mode:logical  
+ Class :character   Class :character   Class :character   NA's:488      
+ Mode  :character   Mode  :character   Mode  :character                 
+                                                                        
+                                                                        
+                                                                        
+ source_name        1st_source_link    2nd_source_link          id       
+ Length:488         Length:488         Length:488         Min.   :  2.0  
+ Class :character   Class :character   Class :character   1st Qu.:123.8  
+ Mode  :character   Mode  :character   Mode  :character   Median :245.5  
+                                                          Mean   :246.4  
+                                                          3rd Qu.:369.2  
+                                                          Max.   :492.0  </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Removing rows with missing 'records lost' or 'year'</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>breaches_clean <span class="ot">&lt;-</span> breaches <span class="sc">|&gt;</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(records_lost) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(year))</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Check summary of cleaned data</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(breaches_clean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> organisation       alternative_name   records_lost           year          
+ Length:488         Length:488         Length:488         Length:488        
+ Class :character   Class :character   Class :character   Class :character  
+ Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+                                                                            
+                                                                            
+                                                                            
+     date              story              sector             method         
+ Length:488         Length:488         Length:488         Length:488        
+ Class :character   Class :character   Class :character   Class :character  
+ Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+                                                                            
+                                                                            
+                                                                            
+ interesting_story  data_sensitivity   displayed_records   ...12        
+ Length:488         Length:488         Length:488         Mode:logical  
+ Class :character   Class :character   Class :character   NA's:488      
+ Mode  :character   Mode  :character   Mode  :character                 
+                                                                        
+                                                                        
+                                                                        
+ source_name        1st_source_link    2nd_source_link          id       
+ Length:488         Length:488         Length:488         Min.   :  2.0  
+ Class :character   Class :character   Class :character   1st Qu.:123.8  
+ Mode  :character   Mode  :character   Mode  :character   Median :245.5  
+                                                          Mean   :246.4  
+                                                          3rd Qu.:369.2  
+                                                          Max.   :492.0  </code></pre>
+</div>
+</div>
+<p><strong>3. Data Transformation:</strong> We standardize and transform data to enhance its structure and usability. This includes converting data types and normalizing records lost by organizational size, if applicable.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert 'year' to a numeric type</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>breaches_clean <span class="ot">&lt;-</span> breaches_clean <span class="sc">|&gt;</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">as.integer</span>(year))</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Categorize 'Breach Type'</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>breaches_clean <span class="ot">&lt;-</span> breaches_clean <span class="sc">|&gt;</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">method =</span> <span class="fu">factor</span>(method))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>4. Augmenting Data:</strong> We may also add new variables for a more detailed analysis, such as categorizing the severity of breaches based on the number of records lost.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a severity label based on the number of records lost</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>breaches_clean <span class="ot">&lt;-</span> breaches_clean <span class="sc">%&gt;%</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Severity =</span> <span class="fu">case_when</span>(</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    records_lost <span class="sc">&gt;</span> <span class="dv">1000000</span> <span class="sc">~</span> <span class="st">"Severe"</span>,</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    records_lost <span class="sc">&gt;</span> <span class="dv">500000</span> <span class="sc">~</span> <span class="st">"Moderate"</span>,</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"Minor"</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>5. Preparing for Analysis:</strong> Finally, we prepare the dataset for analysis by ensuring it is clean and structured appropriately.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Final check and preparation</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>breaches_final <span class="ot">&lt;-</span> breaches_clean <span class="sc">|&gt;</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(organisation, year, records_lost, method, Severity, sector)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(breaches_final, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 6
+   organisation                year records_lost method        Severity sector  
+   &lt;chr&gt;                      &lt;int&gt; &lt;chr&gt;        &lt;fct&gt;         &lt;chr&gt;    &lt;chr&gt;   
+ 1 TD Ameritrade               2007 6,300,000    hacked        Severe   finance 
+ 2 AOL                         2006 20,000,000   oops!         Severe   web     
+ 3 US Dept of Vet Affairs      2006 26,500,000   lost device   Severe   governm…
+ 4 Automatic Data Processing   2006 125,000      poor security Minor    finance 
+ 5 KDDI                        2006 4,000,000    hacked        Severe   telecoms
+ 6 Hewlett Packard             2006 200,000      lost device   Severe   tech, r…
+ 7 Ameritrade Inc.             2005 200,000      lost device   Severe   finance 
+ 8 Citigroup                   2005 3,900,000    lost device   Severe   finance 
+ 9 Cardsystems Solutions Inc.  2005 40,000,000   hacked        Severe   finance 
+10 AOL                         2004 92,000,000   inside job    Severe   web     </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save the cleaned dataset</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(breaches_final, <span class="st">"dataset/breaches_cleaned.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="conclusion" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Conclusion</h1>
+<p>The data is now ready for visualization. The next step will be to create a series of plots that can effectively communicate the scale and impact of the world’s biggest data breaches over time, and additionally allow stakeholders to explore the nuances of these breaches through interactive elements. We will use the <code>ggplot2</code> package to create the initial static visualizations, which will then be enhanced with interactivity using the <code>plotly</code> package. This approach will provide both a detailed overview and an in-depth analysis capability, fostering a deeper understanding of data breaches and their broader implications.</p>
+</section>
+<section id="references" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> References</h1>
+<ol type="1">
+<li>Information is Beautiful. (n.d.). World’s Biggest Data Breaches. Retrieved from <a href="https://informationisbeautiful.net/visualizations/worlds-biggest-data-breaches-hacks/" target="_blank">https://informationisbeautiful.net/visualizations/worlds-biggest-data-breaches-hacks/</a></li>
+</ol>
 </section>
 
 </main>
