@@ -7,7 +7,7 @@ format:
       toc-depth: 2
       number-sections: true
       toc-location: left
-      embed_resources: true
+      embed-resources: true
       page-layout: full
       theme: cosmo
 ---
@@ -100,7 +100,7 @@ These enhancements would not only address the current limitations but also signi
 
 Utilizing `tidyverse` libraries, we will perform a series of data cleaning and transformation steps to prepare the data for analysis and visualization. These steps are crucial to ensure the accuracy and usability of the data.
 
-**1. Loading and Inspecting Data:** First, we load the data using `readr` and inspect it for any inconsistencies or missing values.
+**Loading and Inspecting Data:** First, we load the data using `readr` and inspect it for any inconsistencies or missing values.
 
 ```{r}
 # Load the data
@@ -112,69 +112,7 @@ breaches <- breaches[-1,]
 # Inspect the data
 glimpse(breaches)
 ```
-**2. Handling Missing Values:** We identify and address any missing values, particularly in critical fields like 'Records Lost' and 'Year'.
-```{r}
-# Standardize column names to remove spaces and convert to snake_case
-breaches <- breaches |>
-  rename_with(~ gsub(" ", "_", .)) |>
-  rename_with(tolower)
 
-# Check names again to confirm changes
-names(breaches)
-```
-
-```{r}
-# Check for missing values
-summary(breaches)
-```
-
-```{r}
-# Removing rows with missing 'records lost' or 'year'
-breaches_clean <- breaches |>
-  dplyr::filter(!is.na(records_lost) & !is.na(year))
-
-# Check summary of cleaned data
-summary(breaches_clean)
-```
-
-**3. Data Transformation:** We standardize and transform data to enhance its structure and usability. This includes converting data types and normalizing records lost by organizational size, if applicable.
-
-```{r}
-# Convert 'year' to a numeric type
-breaches_clean <- breaches_clean |>
-  mutate(year = as.integer(year))
-
-# Categorize 'Breach Type'
-breaches_clean <- breaches_clean |>
-  mutate(method = factor(method))
-```
-
-**4. Augmenting Data:** We may also add new variables for a more detailed analysis, such as categorizing the severity of breaches based on the number of records lost.
-
-```{r}
-# Add a severity label based on the number of records lost
-breaches_clean <- breaches_clean %>%
-  mutate(Severity = case_when(
-    records_lost > 1000000 ~ "Severe",
-    records_lost > 500000 ~ "Moderate",
-    TRUE ~ "Minor"
-  ))
-```
-
-**5. Preparing for Analysis:** Finally, we prepare the dataset for analysis by ensuring it is clean and structured appropriately.
-
-```{r}
-# Final check and preparation
-breaches_final <- breaches_clean |>
-  select(organisation, year, records_lost, method, Severity, sector)
-
-tail(breaches_final, 10)
-```
-
-```{r}
-# Save the cleaned dataset
-write_csv(breaches_final, "dataset/breaches_cleaned.csv")
-```
 
 # Conclusion
 
