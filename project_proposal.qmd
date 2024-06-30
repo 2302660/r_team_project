@@ -5,10 +5,11 @@ format:
   html: 
       toc: true
       toc-depth: 2
-      number-sections: true
+      number-sections: false
       toc-location: left
       embed_resources: true
       page-layout: full
+      css : main.css
       theme: cosmo
 ---
 
@@ -40,5 +41,33 @@ For this doucment, the following packages are required:
 ```{r}
 library(conflicted)  
 library(tidyverse)
+library(ggplot2)
 ```
 :::
+
+## Original Data Visualization In Data Breaches
+
+Data breach is a security concern for digital world where unauthorized parties access companies confidential data. 
+
+<br>
+
+David McCandless, Tom Evans, Paul Barton from the "Information Is Beautiful" published an interactive visualization about major data breaches around worldwide, showing the scale of compromised data and the causes behind these breaches, spanning from 2004 to 2024.
+
+<br>
+
+Over the 20 years, there are more and more people who are using the internet which means there are more data in the internet. Also, this is the new era of big data, data has become a valuable asset that can help shape our future better. It is telling us the frequency of data breaches are increasing and more data are getting stolen over the years and we must safeguard our digital data to protect it from unauthorized access, theft or corruption.
+
+<br>
+
+![Figure 1 : Visualization of World Biggest Data Breaches & Hacks](images/original_visualization_one.JPG)
+
+
+![Figure 2: Visualization of Data Breaches By Data Sensitivity](images/original_visualization_two.JPG)
+
+## Critical Assessment of the Original Visualization
+
+Strengths:
+
+.....
+
+## Proposed Improvements
