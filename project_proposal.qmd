@@ -13,7 +13,7 @@ format:
 ---
 
 ::: {.lead .subtitle}
-Visualizing Data Breaches Over Time
+Visualizing World's Biggest Data Breaches and Hacks Over Time
 :::
 
 ::: {#authors_container}
@@ -68,51 +68,106 @@ The original visualization excels in several areas but also presents certain lim
 
 - **Visual Impact:** The use of large, coloured bubbles immediately draws attention and effectively communicates the relative scale of data breaches.
 
-- **Interactivity:** Interactive elements allow users to filter breaches by year and type, facilitating a customized exploration of the data.
+- **Interactivity:** Interactive elements allow users to filter breaches by sector and type, facilitating a customized exploration of the data.
 
-- **Information Density:** A significant amount of information is compactly displayed, providing quick insights into data breaches across different industries and regions.
+- **Information Density:** A significant amount of information is compactly displayed, providing quick insights into data breaches across different organisations and record lost.
 
 **Weaknesses**
 
 - **Complexity and Clarity:** While the visualization holds a wealth of information, its complexity can be overwhelming at first glance, potentially confusing users unfamiliar with interpreting dense graphical data.
 
-- **Contextual Depth:** The visualization lacks contextual layers that could provide deeper insights, such as the financial impact of breaches, the nature of data compromised, or the aftermath in terms of regulatory actions and recovery.
+- **Overlapping Bubbles:** When many data points are close together, bubbles can overlap, making it difficult to distinguish between different breaches.
 
-- **Predictive Insights:** There is an absence of analytical features that could predict trends or identify patterns beyond the descriptive data presented. This limits the visualizations utility for forecasting and strategic planning.
+- **Scalability Issues:** As the number of data points increases, the plot can become cluttered, reducing its effectiveness in conveying clear information.
+
+- **Lack of Depth:** While visually appealing, bubble plots may lack the depth of analysis and may not provide all necessary details for a comprehensive understanding without supplementary information.
 
 # Proposed Enhancements
 
-**1. Normalization Features**
+Our proposed enhancements aim to address the limitations of the original visualization while building upon its strengths. We plan to introduce interactive elements, refine the visual design, and incorporate additional data analysis features to create a more informative and engaging visualization.
 
-Incorporating normalization features to compare breaches based on the size of the organization or the number of users impacted could provide a more nuanced understanding of each incident's significance.
+## Key Enhancements
 
-**2. Trend Analysis**
+1. **Enhanced Filtering:** Introduce advanced filtering options to enable users to segment breaches by industry, year, data sensitivity, or breach method, enhancing the customization and depth of analysis.
 
-Adding trend lines or heat maps to visualize the frequency and severity of breaches over time would aid in identifying underlying patterns and potential vulnerabilities in data security practices.
+2. **Trend Analysis:** Introduce trend analysis features to identify patterns and correlations in data breaches over time, enabling users to gain insights into potential risk factors and emerging trends.
 
-**3. Enhanced Interactivity**
+3. **Colour-Coding:** Utilize colour-coding to represent different breach types, data sensitivity or sectors, enhancing visual clarity and enabling users to quickly identify key information. Include a legend to explain colour codes and improve interpretability.
 
-Expanding the interactivity to include more customizable filters, such as by sector or breach method, could allow users to derive more specific insights tailored to their interests or concerns.
----
-These enhancements would not only address the current limitations but also significantly augment the visualizations value as a tool for comprehensive risk assessment and strategic planning in cybersecurity.
+4. **Legend and Annotations:** Include a legend to explain the meaning of bubble sizes and colours, providing context for users unfamiliar with the visualization. Add annotations to highlight significant breaches or trends, guiding users' attention to key insights.
+
 
 # Data Cleaning and Transformation
 
 Utilizing `tidyverse` libraries, we will perform a series of data cleaning and transformation steps to prepare the data for analysis and visualization. These steps are crucial to ensure the accuracy and usability of the data.
 
-**Loading and Inspecting Data:** First, we load the data using `readr` and inspect it for any inconsistencies or missing values.
+**Loading and Inspecting Data:** First, we load the data and inspect it for any inconsistencies or missing values.
 
 ```{r}
 # Load the data
-breaches <- read_csv("dataset/IIB Data Breaches - LATEST - breaches.csv")
+breaches <- read_csv("dataset/IIB Data Breaches - LATEST - breaches.csv", skip = 1)
 
-# Remove 1st row as it contains unnecessary information
-breaches <- breaches[-1,]
-
-# Inspect the data
-glimpse(breaches)
+head(breaches)
 ```
 
+**Renaming Columns:** We rename the columns to improve readability and consistency.
+```{r}
+# Rename column names
+colnames(breaches) <- c("organisation", "alternative name", "records lost", "year", "date", "story", "sector", "method", "interesting story", "data sensitivity", "records","nill", "source name", "source link", "source-1", "source-2", "id")
+
+colnames(breaches)
+```
+
+**Selecting Relevant Columns:** We select the necessary columns for analysis, including organization, records lost, year, date, story, sector, method, data sensitivity, and source link.
+```{r}
+# Necessary columns
+breaches <- select(breaches, `organisation`,  `records lost`, `year`, `date`, `story`, `sector`, `method`,  `data sensitivity`, `source link`)
+
+colnames(breaches)
+```
+
+**Handling Missing Values:** We check for missing values and duplicates in the dataset and address them using appropriate imputation, filter or removal techniques.
+```{r}
+# Check for missing values
+colSums(is.na(breaches))
+```
+
+```{r}
+# Check for duplicates
+sum(duplicated(breaches))
+```
+
+```{r}
+# Remove missing values in data sensitivity with median imputation
+breaches <- breaches %>% 
+  mutate(`data sensitivity` = ifelse(is.na(`data sensitivity`), median(`data sensitivity`, na.rm = TRUE), `data sensitivity`))
+
+# Remove missing values in story
+breaches <- breaches %>% 
+  dplyr::filter(!is.na(story))
+
+colSums(is.na(breaches))
+```
+
+**Data Transformation:** We transform the data to make it more suitable for analysis and visualization. This includes converting data types, combining columns, and creating new variables.
+```{r}
+# Remove numbers in date column and update in dataset
+breaches$date <- gsub("[0-9]", "", breaches$date)
+
+# Rename date column to month
+colnames(breaches)[4] <- "month"
+
+head(breaches)
+```
+
+```{r}
+# Group breaches by method and data sensitivity and arrange by year
+breaches <- breaches %>%
+  group_by(method, `data sensitivity`) %>%
+  arrange(year)
+
+head(breaches)
+```
 
 # Conclusion
 
