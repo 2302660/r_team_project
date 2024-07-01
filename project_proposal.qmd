@@ -42,6 +42,9 @@ For this doucment, the following packages are required:
 ```{r}
 library(conflicted)  
 library(tidyverse)
+library(knitr)
+library(dplyr)
+library(readr)
 ```
 :::
 
@@ -110,6 +113,7 @@ Utilizing `tidyverse` libraries, we will perform a series of data cleaning and t
 breaches <- read_csv("dataset/IIB Data Breaches - LATEST - breaches.csv", skip = 1)
 
 head(breaches)
+
 ```
 
 **Renaming Columns:** We rename the columns to improve readability and consistency.
@@ -117,7 +121,10 @@ head(breaches)
 # Rename column names
 colnames(breaches) <- c("organisation", "alternative name", "records lost", "year", "date", "story", "sector", "method", "interesting story", "data sensitivity", "records","nill", "source name", "source link", "source-1", "source-2", "id")
 
-colnames(breaches)
+###colnames(breaches)
+
+# Display the new column names
+kable(as.data.frame(colnames(breaches)), col.names = c("Column Names"), caption = "Renamed Columns")
 ```
 
 **Selecting Relevant Columns:** We select the necessary columns for analysis, including organization, records lost, year, date, story, sector, method, data sensitivity, and source link.
@@ -125,18 +132,24 @@ colnames(breaches)
 # Necessary columns
 breaches <- select(breaches, `organisation`,  `records lost`, `year`, `date`, `story`, `sector`, `method`,  `data sensitivity`, `source link`)
 
-colnames(breaches)
+###colnames(breaches)
+
+# Display the selected column names
+kable(as.data.frame(colnames(breaches)), col.names = c("Selected Column Names"), caption = "Selected Columns")
 ```
 
 **Handling Missing Values:** We check for missing values and duplicates in the dataset and address them using appropriate imputation, filter or removal techniques.
 ```{r}
 # Check for missing values
-colSums(is.na(breaches))
+###colSums(is.na(breaches))
+kable(as.data.frame(colSums(is.na(breaches))), col.names = c("Missing Values"), caption = "Missing Values in Each Column")
 ```
 
 ```{r}
 # Check for duplicates
-sum(duplicated(breaches))
+### sum(duplicated(breaches))
+duplicates <- sum(duplicated(breaches))
+kable(as.data.frame(duplicates), col.names = c("Number of Duplicates"), caption = "Number of Duplicate Rows")
 ```
 
 ```{r}
@@ -152,7 +165,8 @@ breaches <- breaches %>%
 breaches <- breaches %>% 
   dplyr::filter(!is.na(`source link`))
 
-colSums(is.na(breaches))
+###colSums(is.na(breaches))
+kable(as.data.frame(colSums(is.na(breaches))), col.names = c("Missing Values After Imputation"), caption = "Remaining Missing Values in Each Column")
 ```
 
 **Data Transformation:** We transform the data to make it more suitable for analysis and visualization. This includes converting data types, combining columns, and creating new variables.
@@ -163,7 +177,8 @@ breaches$date <- gsub("[0-9]", "", breaches$date)
 # Rename date column to month
 colnames(breaches)[4] <- "month"
 
-head(breaches)
+###head(breaches)
+kable(head(breaches), caption = "First Few Rows After Transformation")
 ```
 
 ```{r}
@@ -172,7 +187,8 @@ breaches <- breaches %>%
   group_by(method, `data sensitivity`) %>%
   arrange(year)
 
-head(breaches)
+###head(breaches)
+kable(head(breaches), caption = "First Few Rows After Grouping and Arranging")
 ```
 
 # Conclusion
