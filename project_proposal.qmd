@@ -37,14 +37,12 @@ Authors
 :::
 
 ::: section
-For this doucment, the following packages are required:
+For this document, the following libraries are required:
 
 ```{r}
 library(conflicted)  
 library(tidyverse)
 library(knitr)
-library(dplyr)
-library(readr)
 ```
 :::
 
@@ -99,7 +97,9 @@ Our proposed enhancements aim to address the limitations of the original visuali
 
 3. **Colour-Coding:** Utilize colour-coding to represent different breach types, data sensitivity or sectors, enhancing visual clarity and enabling users to quickly identify key information. Include a legend to explain colour codes and improve interpretability.
 
-4. **Legend and Annotations:** Include a legend to explain the meaning of bubble sizes and colours, providing context for users unfamiliar with the visualization. Add annotations to highlight significant breaches or trends, guiding users' attention to key insights.
+4. **Overlapping Resolution:** Implement a solution to address overlapping, such as Transparency (Alpha), jittering, grouping, or dynamic resizing, to ensure that all data points are clearly visible and distinguishable.
+
+5. **Legend and Annotations:** Include a legend to explain the meaning of bubble sizes and colours, providing context for users unfamiliar with the visualization. Add annotations to highlight significant breaches or trends, guiding users' attention to key insights.
 
 
 # Data Cleaning and Transformation
@@ -113,7 +113,6 @@ Utilizing `tidyverse` libraries, we will perform a series of data cleaning and t
 breaches <- read_csv("dataset/IIB Data Breaches - LATEST - breaches.csv", skip = 1)
 
 head(breaches)
-
 ```
 
 **Renaming Columns:** We rename the columns to improve readability and consistency.
