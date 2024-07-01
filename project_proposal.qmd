@@ -7,13 +7,13 @@ format:
       toc-depth: 2
       number-sections: true
       toc-location: left
-      embed_resources: true
+      embed-resources: true
       page-layout: full
       theme: cosmo
 ---
 
 ::: {.lead .subtitle}
-Visualizing Data Breaches Over Time
+Visualizing World's Biggest Data Breaches and Hacks Over Time
 :::
 
 ::: {#authors_container}
@@ -42,3 +42,146 @@ library(conflicted)
 library(tidyverse)
 ```
 :::
+
+# Introduction
+
+## Background and Significance
+The surge in digital data transmission has amplified the susceptibility of information systems to security breaches. Our project utilizes the dataset from Information is Beautiful on the world’s biggest data breaches to augment the existing visualization.
+
+## Objectives
+We plan to add features to the visualization, normalize the data and run comparative analyses, and develop models to predict future breaches. Our objective is to transform this visualization into a more dynamic and analytical tool that not only reflects previous data breaches but also provides insights into potential future trends.
+
+## Data Source
+The dataset is obtained from Information is Beautiful, which contains information on the world’s biggest data breaches. The dataset includes the date of the breach, the organization involved, the method of the breach, the number of records lost, and the sector of the organization.
+
+# Original Visualization Assessment
+
+## Description of the Visualization
+The original visualization, shown in @fig-Figure_1, is a compelling graphical representation that uses varying bubble sizes and colours to depict the magnitude and frequency of major data breaches impacting organizations worldwide. Organized chronologically and segmented by year, the visualization offers a clear timeline of data breaches, providing immediate visual insight into the evolution and escalation of data security issues over time.
+
+![This bubble chart illustrates the scale and impact of major global data breaches, categorized by the organization and number of records lost.](original_visualization.png){#fig-Figure_1}
+
+## Critical Assessment 
+The original visualization excels in several areas but also presents certain limitations that could be addressed to enhance its utility and interpretability:
+
+**Strengths**
+
+- **Visual Impact:** The use of large, coloured bubbles immediately draws attention and effectively communicates the relative scale of data breaches.
+
+- **Interactivity:** Interactive elements allow users to filter breaches by sector and type, facilitating a customized exploration of the data.
+
+- **Information Density:** A significant amount of information is compactly displayed, providing quick insights into data breaches across different organisations and record lost.
+
+**Weaknesses**
+
+- **Complexity and Clarity:** While the visualization holds a wealth of information, its complexity can be overwhelming at first glance, potentially confusing users unfamiliar with interpreting dense graphical data.
+
+- **Overlapping Bubbles:** When many data points are close together, bubbles can overlap, making it difficult to distinguish between different breaches.
+
+- **Scalability Issues:** As the number of data points increases, the plot can become cluttered, reducing its effectiveness in conveying clear information.
+
+- **Lack of Depth:** While visually appealing, bubble plots may lack the depth of analysis and may not provide all necessary details for a comprehensive understanding without supplementary information.
+
+# Proposed Enhancements
+
+Our proposed enhancements aim to address the limitations of the original visualization while building upon its strengths. We plan to introduce interactive elements, refine the visual design, and incorporate additional data analysis features to create a more informative and engaging visualization.
+
+## Key Enhancements
+
+1. **Enhanced Filtering:** Introduce advanced filtering options to enable users to segment breaches by industry, year, data sensitivity, or breach method, enhancing the customization and depth of analysis.
+
+2. **Trend Analysis:** Introduce trend analysis features to identify patterns and correlations in data breaches over time, enabling users to gain insights into potential risk factors and emerging trends.
+
+3. **Colour-Coding:** Utilize colour-coding to represent different breach types, data sensitivity or sectors, enhancing visual clarity and enabling users to quickly identify key information. Include a legend to explain colour codes and improve interpretability.
+
+4. **Legend and Annotations:** Include a legend to explain the meaning of bubble sizes and colours, providing context for users unfamiliar with the visualization. Add annotations to highlight significant breaches or trends, guiding users' attention to key insights.
+
+
+# Data Cleaning and Transformation
+
+Utilizing `tidyverse` libraries, we will perform a series of data cleaning and transformation steps to prepare the data for analysis and visualization. These steps are crucial to ensure the accuracy and usability of the data.
+
+**Loading and Inspecting Data:** First, we load the data and inspect it for any inconsistencies or missing values.
+
+```{r}
+# Load the data
+breaches <- read_csv("dataset/IIB Data Breaches - LATEST - breaches.csv", skip = 1)
+
+head(breaches)
+```
+
+**Renaming Columns:** We rename the columns to improve readability and consistency.
+```{r}
+# Rename column names
+colnames(breaches) <- c("organisation", "alternative name", "records lost", "year", "date", "story", "sector", "method", "interesting story", "data sensitivity", "records","nill", "source name", "source link", "source-1", "source-2", "id")
+
+colnames(breaches)
+```
+
+**Selecting Relevant Columns:** We select the necessary columns for analysis, including organization, records lost, year, date, story, sector, method, data sensitivity, and source link.
+```{r}
+# Necessary columns
+breaches <- select(breaches, `organisation`,  `records lost`, `year`, `date`, `story`, `sector`, `method`,  `data sensitivity`, `source link`)
+
+colnames(breaches)
+```
+
+**Handling Missing Values:** We check for missing values and duplicates in the dataset and address them using appropriate imputation, filter or removal techniques.
+```{r}
+# Check for missing values
+colSums(is.na(breaches))
+```
+
+```{r}
+# Check for duplicates
+sum(duplicated(breaches))
+```
+
+```{r}
+# Remove missing values in data sensitivity with median imputation
+breaches <- breaches %>% 
+  mutate(`data sensitivity` = ifelse(is.na(`data sensitivity`), median(`data sensitivity`, na.rm = TRUE), `data sensitivity`))
+
+# Remove missing values in story
+breaches <- breaches %>% 
+  dplyr::filter(!is.na(story))
+
+colSums(is.na(breaches))
+```
+
+**Data Transformation:** We transform the data to make it more suitable for analysis and visualization. This includes converting data types, combining columns, and creating new variables.
+```{r}
+# Remove numbers in date column and update in dataset
+breaches$date <- gsub("[0-9]", "", breaches$date)
+
+# Rename date column to month
+colnames(breaches)[4] <- "month"
+
+head(breaches)
+```
+
+```{r}
+# Group breaches by method and data sensitivity and arrange by year
+breaches <- breaches %>%
+  group_by(method, `data sensitivity`) %>%
+  arrange(year)
+
+head(breaches)
+```
+
+# Conclusion
+
+The data is now ready for visualization. The next step will be to create a series of plots that can effectively communicate the scale and impact of the world's biggest data breaches over time, and additionally allow stakeholders to explore the nuances of these breaches through interactive elements. We will use the `ggplot2` package to create the initial static visualizations, which will then be enhanced with interactivity using the `plotly` package. This approach will provide both a detailed overview and an in-depth analysis capability, fostering a deeper understanding of data breaches and their broader implications.
+
+# References
+
+1. Information is Beautiful. (n.d.). World's Biggest Data Breaches. Retrieved from [https://informationisbeautiful.net/visualizations/worlds-biggest-data-breaches-hacks/](https://informationisbeautiful.net/visualizations/worlds-biggest-data-breaches-hacks/){target="_blank"}
+
+
+
+
+
+
+
+
+
