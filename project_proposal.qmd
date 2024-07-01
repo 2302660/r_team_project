@@ -23,17 +23,17 @@ Visualizing World's Biggest Data Breaches and Hacks Over Time
 Authors
 :::
 
-1.  Heng Yu Xin
+1.  Heng Yu Xin 2302786
 
-2.  Javier Si Zhao Hong
+2.  Javier Si Zhao Hong 2302655
 
-3.  Tan Guan Hong
+3.  Tan Guan Hong 2302687
 
-4.  Hong Ziyang
+4.  Hong Ziyang 2302660
 
-5.  Abdul Haliq Bin Abdul Rahim
+5.  Abdul Haliq Bin Abdul Rahim 2302747
 
-6.  See Toh Ming Xuan Axel
+6.  See Toh Ming Xuan Axel 2302790
 :::
 
 ::: section
@@ -49,25 +49,27 @@ library(knitr)
 # Introduction
 
 ## Background and Significance
-The surge in digital data transmission has amplified the susceptibility of information systems to security breaches. Our project utilizes the dataset from Information is Beautiful [@McCandlessEvans2024] on the world’s biggest data breaches to augment the existing visualization.
+The surge in digital data transmission has amplified the susceptibility of information systems to security breaches. Our project utilizes the dataset from **Information is Beautiful** [@McCandlessEvans2024] on the world’s biggest data breaches to augment the existing visualization.
 
 ## Objectives
 We plan to add features to the visualization, normalize the data and run comparative analyses, and develop models to predict future breaches. Our objective is to transform this visualization into a more dynamic and analytical tool that not only reflects previous data breaches but also provides insights into potential future trends.
 
 ## Data Source
-The dataset is obtained from Information is Beautiful [@McCandlessEvans2024], which contains information on the world’s biggest data breaches. The dataset includes the date of the breach, the organization involved, the method of the breach, the number of records lost, and the sector of the organization.
+The dataset is obtained from **Information is Beautiful** [@McCandlessEvans2024], which contains information on the world’s biggest data breaches. The dataset includes the date of the breach, the organization involved, the method of the breach, the number of records lost, and the sector of the organization.
 
 # Original Visualization Assessment
 
 ## Description of the Visualization
-The original visualization, shown in @fig-Figure_1, is a compelling graphical representation that uses varying bubble sizes and colours to depict the magnitude and frequency of major data breaches impacting organizations worldwide. Organized chronologically and segmented by year, the visualization offers a clear timeline of data breaches, providing immediate visual insight into the evolution and escalation of data security issues over time.
+The original visualization, shown in @fig-Figure_1, is a compelling graphical representation that uses varying bubble sizes and colours to depict the magnitude and frequency of major data breaches impacting organizations worldwide. Each bubble represents a data breach event, with the size corresponding to the number of records lost and the color indicating the sector or method of the breach. Organized chronologically and segmented by year, the visualization offers a clear timeline of data breaches, providing immediate visual insight into the evolution and escalation of data security issues over time. 
+
+Interactive elements allow users to explore detailed information about each breach, including the affected organization, the number of records lost, and the method of the breach. Interactive elements allow users to explore detailed information about each breach, including the affected organization, the number of records lost, and the method of the breach. This interactivity enhances the user's ability to analyze specific data points and discern patterns over time.
 
 ![This bubble chart illustrates the scale and impact of major global data breaches, categorized by the organization and number of records lost. [@McCandlessEvans2024]](original_visualization.png){#fig-Figure_1}
 
 ## Critical Assessment 
 The original visualization excels in several areas but also presents certain limitations that could be addressed to enhance its utility and interpretability:
 
-**Strengths**
+<u>**Strengths**</u>
 
 - **Visual Impact:** The use of large, coloured bubbles immediately draws attention and effectively communicates the relative scale of data breaches.
 
@@ -75,7 +77,7 @@ The original visualization excels in several areas but also presents certain lim
 
 - **Information Density:** A significant amount of information is compactly displayed, providing quick insights into data breaches across different organisations and record lost.
 
-**Weaknesses**
+<u>**Weaknesses**</u>
 
 - **Complexity and Clarity:** While the visualization holds a wealth of information, its complexity can be overwhelming at first glance, potentially confusing users unfamiliar with interpreting dense graphical data.
 
