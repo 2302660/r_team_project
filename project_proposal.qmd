@@ -1,5 +1,6 @@
 ---
 title: "Team Project Proposal"
+bibliography: references.bib
 
 format: 
   html: 
@@ -8,6 +9,7 @@ format:
       number-sections: true
       toc-location: left
       embed-resources: true
+      smooth-scroll: true
       page-layout: full
       theme: cosmo
 ---
@@ -46,20 +48,20 @@ library(tidyverse)
 # Introduction
 
 ## Background and Significance
-The surge in digital data transmission has amplified the susceptibility of information systems to security breaches. Our project utilizes the dataset from Information is Beautiful on the world’s biggest data breaches to augment the existing visualization.
+The surge in digital data transmission has amplified the susceptibility of information systems to security breaches [@McCandlessEvans2024]. Our project utilizes the dataset from Information is Beautiful on the world’s biggest data breaches to augment the existing visualization.
 
 ## Objectives
 We plan to add features to the visualization, normalize the data and run comparative analyses, and develop models to predict future breaches. Our objective is to transform this visualization into a more dynamic and analytical tool that not only reflects previous data breaches but also provides insights into potential future trends.
 
 ## Data Source
-The dataset is obtained from Information is Beautiful, which contains information on the world’s biggest data breaches. The dataset includes the date of the breach, the organization involved, the method of the breach, the number of records lost, and the sector of the organization.
+The dataset is obtained from Information is Beautiful [@McCandlessEvans2024], which contains information on the world’s biggest data breaches. The dataset includes the date of the breach, the organization involved, the method of the breach, the number of records lost, and the sector of the organization.
 
 # Original Visualization Assessment
 
 ## Description of the Visualization
 The original visualization, shown in @fig-Figure_1, is a compelling graphical representation that uses varying bubble sizes and colours to depict the magnitude and frequency of major data breaches impacting organizations worldwide. Organized chronologically and segmented by year, the visualization offers a clear timeline of data breaches, providing immediate visual insight into the evolution and escalation of data security issues over time.
 
-![This bubble chart illustrates the scale and impact of major global data breaches, categorized by the organization and number of records lost.](original_visualization.png){#fig-Figure_1}
+![This bubble chart illustrates the scale and impact of major global data breaches, categorized by the organization and number of records lost. [@McCandlessEvans2024]](original_visualization.png){#fig-Figure_1}
 
 ## Critical Assessment 
 The original visualization excels in several areas but also presents certain limitations that could be addressed to enhance its utility and interpretability:
@@ -146,6 +148,10 @@ breaches <- breaches %>%
 breaches <- breaches %>% 
   dplyr::filter(!is.na(story))
 
+# Remove missing values in source link
+breaches <- breaches %>% 
+  dplyr::filter(!is.na(`source link`))
+
 colSums(is.na(breaches))
 ```
 
@@ -173,9 +179,7 @@ head(breaches)
 
 The data is now ready for visualization. The next step will be to create a series of plots that can effectively communicate the scale and impact of the world's biggest data breaches over time, and additionally allow stakeholders to explore the nuances of these breaches through interactive elements. We will use the `ggplot2` package to create the initial static visualizations, which will then be enhanced with interactivity using the `plotly` package. This approach will provide both a detailed overview and an in-depth analysis capability, fostering a deeper understanding of data breaches and their broader implications.
 
-# References
 
-1. Information is Beautiful. (n.d.). World's Biggest Data Breaches. Retrieved from [https://informationisbeautiful.net/visualizations/worlds-biggest-data-breaches-hacks/](https://informationisbeautiful.net/visualizations/worlds-biggest-data-breaches-hacks/){target="_blank"}
 
 
 
