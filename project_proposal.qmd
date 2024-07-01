@@ -48,7 +48,7 @@ library(tidyverse)
 # Introduction
 
 ## Background and Significance
-The surge in digital data transmission has amplified the susceptibility of information systems to security breaches [@McCandlessEvans2024]. Our project utilizes the dataset from Information is Beautiful on the world’s biggest data breaches to augment the existing visualization.
+The surge in digital data transmission has amplified the susceptibility of information systems to security breaches. Our project utilizes the dataset from Information is Beautiful [@McCandlessEvans2024] on the world’s biggest data breaches to augment the existing visualization.
 
 ## Objectives
 We plan to add features to the visualization, normalize the data and run comparative analyses, and develop models to predict future breaches. Our objective is to transform this visualization into a more dynamic and analytical tool that not only reflects previous data breaches but also provides insights into potential future trends.
