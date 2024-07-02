@@ -1,5 +1,5 @@
 ---
-title: "Team Project Proposal"
+title: "Team 9 Project Proposal"
 bibliography: references.bib
 
 format: 
