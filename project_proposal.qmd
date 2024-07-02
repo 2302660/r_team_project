@@ -41,7 +41,9 @@ For this doucment, the following packages are required:
 ```{r}
 library(conflicted)  
 library(tidyverse)
+library(knitr)
 library(ggplot2)
+
 ```
 :::
 
@@ -71,3 +73,71 @@ Strengths:
 .....
 
 ## Proposed Improvements
+
+
+```{r}
+# Load the data
+breaches <- read_csv("dataset/IIB Data Breaches - LATEST - breaches.csv", skip = 1)
+companies_info <- read_csv("dataset/companies_sorted.csv", skip = 1)
+
+# Rename column names
+colnames(breaches) <- c("organisation", "alternative name", "records lost", "year", "date", "story", "sector", "method", "interesting story", "data sensitivity", "records","nill", "source name", "source link", "source-1", "source-2", "id")
+
+# Rename column names
+colnames(companies_info) <- c("organisation_id","organisation","domain","year_found","industry","size_range","locality","country","linkedin_url","current_employee estimate","total_employee_estimate")
+
+# Necessary columns for companies_info
+companies_info <- select(companies_info,"organisation","locality","country")
+
+kable(as.data.frame(colnames(companies_info)), col.names = c("Selected Column Names"), caption = "Selected Columns")
+
+```
+
+```{r}
+companies_info
+
+duplicates <- companies_info[duplicated(companies_info), ]
+duplicates
+
+clean_organisation <- function(org) {
+  org %>%
+    str_to_lower() %>%       # Convert to lowercase
+    str_trim() %>%           # Trim leading/trailing whitespace
+    str_replace_all("\\s+", "") %>% # Remove all whitespace
+    str_replace_all("[^\\w]", "") %>% # Remove special characters
+    iconv(to = "ASCII//TRANSLIT")   # Convert to ASCII
+}
+
+breaches <- breaches %>%
+  mutate(organisation = clean_organisation(organisation))
+
+updated_companies_info_df <- companies_info %>%
+  mutate(organisation = clean_organisation(organisation))
+
+
+# Remove duplicates and select first occurrences
+unique_df <- companies_info %>%
+  distinct(organisation, .keep_all = TRUE)
+unique_df
+
+unique_breaches <- breaches %>%
+  distinct(organisation, .keep_all = TRUE)
+unique_breaches
+# Remove rows with missing values using na. omit()
+updated_companies_info_df <- na.omit(unique_df)
+updated_companies_info_df
+
+
+merged_df <- left_join(unique_breaches, updated_companies_info_df, by="organisation")
+merged_df
+
+```
+
+
+
+
+```{r}
+
+write.csv(merged_df, "cleaned_companies_data_breaches.csv")
+
+```

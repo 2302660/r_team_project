@@ -144,7 +144,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 ✔ lubridate 1.9.3     ✔ tidyr     1.3.1
 ✔ purrr     1.0.2     </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="original-data-visualization-in-data-breaches" class="level2">
@@ -175,6 +176,212 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="proposed-improvements" class="level2">
 <h2 class="anchored" data-anchor-id="proposed-improvements">Proposed Improvements</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the data</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>breaches <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"dataset/IIB Data Breaches - LATEST - breaches.csv"</span>, <span class="at">skip =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>New names:
+Rows: 488 Columns: 16
+── Column specification
+──────────────────────────────────────────────────────── Delimiter: "," chr
+(12): visualisation here: https://informationisbeautiful.net/visualizati... dbl
+(3): year story broke, 1. Just email address/Online information 2 SSN/... lgl
+(1): ...12
+ℹ Use `spec()` to retrieve the full column specification for this data. ℹ
+Specify the column types or set `show_col_types = FALSE` to quiet this message.
+• `` -&gt; `...2`
+• `` -&gt; `...5`
+• `` -&gt; `...6`
+• `` -&gt; `...9`
+• `` -&gt; `...11`
+• `` -&gt; `...12`
+• `` -&gt; `...13`
+• `` -&gt; `...14`
+• `` -&gt; `...15`
+• `` -&gt; `...16`</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>companies_info <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"dataset/companies_sorted.csv"</span>, <span class="at">skip =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 7173425 Columns: 11
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (7): ibm, ibm.com, information technology and services, 10001+, new york...
+dbl (4): 5872184, 1911.0, 274047, 716906
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Rename column names</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(breaches) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"organisation"</span>, <span class="st">"alternative name"</span>, <span class="st">"records lost"</span>, <span class="st">"year"</span>, <span class="st">"date"</span>, <span class="st">"story"</span>, <span class="st">"sector"</span>, <span class="st">"method"</span>, <span class="st">"interesting story"</span>, <span class="st">"data sensitivity"</span>, <span class="st">"records"</span>,<span class="st">"nill"</span>, <span class="st">"source name"</span>, <span class="st">"source link"</span>, <span class="st">"source-1"</span>, <span class="st">"source-2"</span>, <span class="st">"id"</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Rename column names</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(companies_info) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"organisation_id"</span>,<span class="st">"organisation"</span>,<span class="st">"domain"</span>,<span class="st">"year_found"</span>,<span class="st">"industry"</span>,<span class="st">"size_range"</span>,<span class="st">"locality"</span>,<span class="st">"country"</span>,<span class="st">"linkedin_url"</span>,<span class="st">"current_employee estimate"</span>,<span class="st">"total_employee_estimate"</span>)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Necessary columns for companies_info</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>companies_info <span class="ot">&lt;-</span> <span class="fu">select</span>(companies_info,<span class="st">"organisation"</span>,<span class="st">"locality"</span>,<span class="st">"country"</span>)</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">as.data.frame</span>(<span class="fu">colnames</span>(companies_info)), <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"Selected Column Names"</span>), <span class="at">caption =</span> <span class="st">"Selected Columns"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<caption>Selected Columns</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Selected Column Names</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">organisation</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">locality</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">country</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>companies_info</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 7,173,425 × 3
+   organisation                   locality                               country
+   &lt;chr&gt;                          &lt;chr&gt;                                  &lt;chr&gt;  
+ 1 tata consultancy services      bombay, maharashtra, india             india  
+ 2 accenture                      dublin, dublin, ireland                ireland
+ 3 us army                        alexandria, virginia, united states    united…
+ 4 ey                             london, greater london, united kingdom united…
+ 5 hewlett-packard                palo alto, california, united states   united…
+ 6 cognizant technology solutions teaneck, new jersey, united states     united…
+ 7 walmart                        withee, wisconsin, united states       united…
+ 8 microsoft                      redmond, washington, united states     united…
+ 9 at&amp;t                           dallas, texas, united states           united…
+10 united states air force        randolph, texas, united states         united…
+# ℹ 7,173,415 more rows</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>duplicates <span class="ot">&lt;-</span> companies_info[<span class="fu">duplicated</span>(companies_info), ]</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>duplicates</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 44,135 × 3
+   organisation             locality                                     country
+   &lt;chr&gt;                    &lt;chr&gt;                                        &lt;chr&gt;  
+ 1 standard chartered bank  london, greater london, united kingdom       united…
+ 2 procter &amp; gamble         cincinnati, ohio, united states              united…
+ 3 independiente            &lt;NA&gt;                                         &lt;NA&gt;   
+ 4 autonomo                 &lt;NA&gt;                                         &lt;NA&gt;   
+ 5 particular               &lt;NA&gt;                                         &lt;NA&gt;   
+ 6 internal revenue service washington, district of columbia, united st… united…
+ 7 stay at home mom         &lt;NA&gt;                                         &lt;NA&gt;   
+ 8 autonomo                 &lt;NA&gt;                                         &lt;NA&gt;   
+ 9 autônomo                 &lt;NA&gt;                                         &lt;NA&gt;   
+10 education queensland     &lt;NA&gt;                                         &lt;NA&gt;   
+# ℹ 44,125 more rows</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>clean_organisation <span class="ot">&lt;-</span> <span class="cf">function</span>(org) {</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  org <span class="sc">%&gt;%</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_to_lower</span>() <span class="sc">%&gt;%</span>       <span class="co"># Convert to lowercase</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_trim</span>() <span class="sc">%&gt;%</span>           <span class="co"># Trim leading/trailing whitespace</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_replace_all</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">s+"</span>, <span class="st">""</span>) <span class="sc">%&gt;%</span> <span class="co"># Remove all whitespace</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_replace_all</span>(<span class="st">"[^</span><span class="sc">\\</span><span class="st">w]"</span>, <span class="st">""</span>) <span class="sc">%&gt;%</span> <span class="co"># Remove special characters</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">iconv</span>(<span class="at">to =</span> <span class="st">"ASCII//TRANSLIT"</span>)   <span class="co"># Convert to ASCII</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>breaches <span class="ot">&lt;-</span> breaches <span class="sc">%&gt;%</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">organisation =</span> <span class="fu">clean_organisation</span>(organisation))</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>updated_companies_info_df <span class="ot">&lt;-</span> companies_info <span class="sc">%&gt;%</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">organisation =</span> <span class="fu">clean_organisation</span>(organisation))</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove duplicates and select first occurrences</span></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>unique_df <span class="ot">&lt;-</span> companies_info <span class="sc">%&gt;%</span></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(organisation, <span class="at">.keep_all =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>unique_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 7,004,635 × 3
+   organisation                   locality                               country
+   &lt;chr&gt;                          &lt;chr&gt;                                  &lt;chr&gt;  
+ 1 tata consultancy services      bombay, maharashtra, india             india  
+ 2 accenture                      dublin, dublin, ireland                ireland
+ 3 us army                        alexandria, virginia, united states    united…
+ 4 ey                             london, greater london, united kingdom united…
+ 5 hewlett-packard                palo alto, california, united states   united…
+ 6 cognizant technology solutions teaneck, new jersey, united states     united…
+ 7 walmart                        withee, wisconsin, united states       united…
+ 8 microsoft                      redmond, washington, united states     united…
+ 9 at&amp;t                           dallas, texas, united states           united…
+10 united states air force        randolph, texas, united states         united…
+# ℹ 7,004,625 more rows</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>unique_breaches <span class="ot">&lt;-</span> breaches <span class="sc">%&gt;%</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(organisation, <span class="at">.keep_all =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>unique_breaches</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 446 × 16
+   organisation       `alternative name` `records lost`  year date  story sector
+   &lt;chr&gt;              &lt;chr&gt;              &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; 
+ 1 kaiserpermanente   &lt;NA&gt;               13,400,000      2024 Apr … A le… health
+ 2 ticketmaster       &lt;NA&gt;               560,000,000     2024 Jun … Hack… media 
+ 3 stanforduniversity &lt;NA&gt;               27,000          2023 May … The … acade…
+ 4 coolermaster       &lt;NA&gt;               500,000         2024 May … Thre… tech  
+ 5 financialbusiness… FBCS               3,200,000       2024 Feb … A U.… tech  
+ 6 santander          &lt;NA&gt;               30,000,000      2024 May … Thre… finan…
+ 7 everbridge         &lt;NA&gt;               5,600,000       2024 May … The … tech  
+ 8 bbc                &lt;NA&gt;               25,000          2024 May … Pers… media 
+ 9 firstamerican      &lt;NA&gt;               44,000          2023 Dec … The … finan…
+10 christies          &lt;NA&gt;               500,000         2024 May … Famo… retail
+# ℹ 436 more rows
+# ℹ 9 more variables: method &lt;chr&gt;, `interesting story` &lt;chr&gt;,
+#   `data sensitivity` &lt;dbl&gt;, records &lt;chr&gt;, nill &lt;lgl&gt;, `source name` &lt;chr&gt;,
+#   `source link` &lt;chr&gt;, `source-1` &lt;chr&gt;, `source-2` &lt;dbl&gt;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove rows with missing values using na. omit()</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>updated_companies_info_df <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(unique_df)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>updated_companies_info_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4,563,999 × 3
+   organisation                   locality                               country
+   &lt;chr&gt;                          &lt;chr&gt;                                  &lt;chr&gt;  
+ 1 tata consultancy services      bombay, maharashtra, india             india  
+ 2 accenture                      dublin, dublin, ireland                ireland
+ 3 us army                        alexandria, virginia, united states    united…
+ 4 ey                             london, greater london, united kingdom united…
+ 5 hewlett-packard                palo alto, california, united states   united…
+ 6 cognizant technology solutions teaneck, new jersey, united states     united…
+ 7 walmart                        withee, wisconsin, united states       united…
+ 8 microsoft                      redmond, washington, united states     united…
+ 9 at&amp;t                           dallas, texas, united states           united…
+10 united states air force        randolph, texas, united states         united…
+# ℹ 4,563,989 more rows</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>merged_df <span class="ot">&lt;-</span> <span class="fu">left_join</span>(unique_breaches, updated_companies_info_df, <span class="at">by=</span><span class="st">"organisation"</span>)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>merged_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 446 × 18
+   organisation       `alternative name` `records lost`  year date  story sector
+   &lt;chr&gt;              &lt;chr&gt;              &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; 
+ 1 kaiserpermanente   &lt;NA&gt;               13,400,000      2024 Apr … A le… health
+ 2 ticketmaster       &lt;NA&gt;               560,000,000     2024 Jun … Hack… media 
+ 3 stanforduniversity &lt;NA&gt;               27,000          2023 May … The … acade…
+ 4 coolermaster       &lt;NA&gt;               500,000         2024 May … Thre… tech  
+ 5 financialbusiness… FBCS               3,200,000       2024 Feb … A U.… tech  
+ 6 santander          &lt;NA&gt;               30,000,000      2024 May … Thre… finan…
+ 7 everbridge         &lt;NA&gt;               5,600,000       2024 May … The … tech  
+ 8 bbc                &lt;NA&gt;               25,000          2024 May … Pers… media 
+ 9 firstamerican      &lt;NA&gt;               44,000          2023 Dec … The … finan…
+10 christies          &lt;NA&gt;               500,000         2024 May … Famo… retail
+# ℹ 436 more rows
+# ℹ 11 more variables: method &lt;chr&gt;, `interesting story` &lt;chr&gt;,
+#   `data sensitivity` &lt;dbl&gt;, records &lt;chr&gt;, nill &lt;lgl&gt;, `source name` &lt;chr&gt;,
+#   `source link` &lt;chr&gt;, `source-1` &lt;chr&gt;, `source-2` &lt;dbl&gt;, locality &lt;chr&gt;,
+#   country &lt;chr&gt;</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(merged_df, <span class="st">"cleaned_companies_data_breaches.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 
 </main>
