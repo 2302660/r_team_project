@@ -71,11 +71,13 @@ The original visualization excels in several areas but also presents certain lim
 
 <u>**Strengths**</u>
 
-- **Visual Impact:** The use of large, coloured bubbles immediately draws attention and effectively communicates the relative scale of data breaches.
+- **Visual Impact:** The use of large, coloured bubbles immediately draws attention and effectively communicates the relative scale of data breaches. The varying bubble sizes enable quick visual comparisons between the magnitudes of different breaches, helping to identify which incidents had the largest impact.
 
 - **Interactivity:** Interactive elements allow users to filter breaches by sector and type, facilitating a customized exploration of the data.
 
 - **Information Density:** A significant amount of information is compactly displayed, providing quick insights into data breaches across different organisations and record lost.
+
+- **Chronological Clarity:** The layout organizes data breaches chronologically, making it easy to track the frequency and evolution of breaches over time.
 
 <u>**Weaknesses**</u>
 
