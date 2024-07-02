@@ -23,17 +23,17 @@ Visualizing World's Biggest Data Breaches and Hacks Over Time
 Authors
 :::
 
-1.  Heng Yu Xin 2302786
+1.  Heng Yu Xin 
 
-2.  Javier Si Zhao Hong 2302655
+2.  Javier Si Zhao Hong 
 
-3.  Tan Guan Hong 2302687
+3.  Tan Guan Hong 
 
-4.  Hong Ziyang 2302660
+4.  Hong Ziyang 
 
-5.  Abdul Haliq Bin Abdul Rahim 2302747
+5.  Abdul Haliq Bin Abdul Rahim 
 
-6.  See Toh Ming Xuan Axel 2302790
+6.  See Toh Ming Xuan Axel 
 :::
 
 ::: section
@@ -55,7 +55,7 @@ The surge in digital data transmission has amplified the susceptibility of infor
 We plan to add features to the visualization, normalize the data and run comparative analyses, and develop models to predict future breaches. Our objective is to transform this visualization into a more dynamic and analytical tool that not only reflects previous data breaches but also provides insights into potential future trends.
 
 ## Data Source
-The dataset is obtained from **Information is Beautiful** [@McCandlessEvans2024], which contains information on the world’s biggest data breaches. The dataset includes the date of the breach, the organization involved, the method of the breach, the number of records lost, and the sector of the organization.
+The dataset is obtained from **Information is Beautiful** [@McCandlessEvans2024], which contains information on the world’s biggest data breaches. The dataset includes the date of the breach, the organization involved, the method of the breach, the number of records lost, the sector of the organization and more.
 
 # Original Visualization Assessment
 
@@ -124,9 +124,6 @@ head(breaches)
 # Rename column names
 colnames(breaches) <- c("organisation", "alternative name", "records lost", "year", "date", "story", "sector", "method", "interesting story", "data sensitivity", "records","nill", "source name", "source link", "source-1", "source-2", "id")
 
-###colnames(breaches)
-
-# Display the new column names
 kable(as.data.frame(colnames(breaches)), col.names = c("Column Names"), caption = "Renamed Columns")
 ```
 
@@ -135,23 +132,19 @@ kable(as.data.frame(colnames(breaches)), col.names = c("Column Names"), caption 
 # Necessary columns
 breaches <- select(breaches, `organisation`,  `records lost`, `year`, `date`, `story`, `sector`, `method`,  `data sensitivity`, `source link`)
 
-###colnames(breaches)
-
-# Display the selected column names
 kable(as.data.frame(colnames(breaches)), col.names = c("Selected Column Names"), caption = "Selected Columns")
 ```
 
 **Handling Missing Values:** We check for missing values and duplicates in the dataset and address them using appropriate imputation, filter or removal techniques.
 ```{r}
 # Check for missing values
-###colSums(is.na(breaches))
 kable(as.data.frame(colSums(is.na(breaches))), col.names = c("Missing Values"), caption = "Missing Values in Each Column")
 ```
 
 ```{r}
 # Check for duplicates
-### sum(duplicated(breaches))
 duplicates <- sum(duplicated(breaches))
+
 kable(as.data.frame(duplicates), col.names = c("Number of Duplicates"), caption = "Number of Duplicate Rows")
 ```
 
@@ -168,7 +161,6 @@ breaches <- breaches %>%
 breaches <- breaches %>% 
   dplyr::filter(!is.na(`source link`))
 
-###colSums(is.na(breaches))
 kable(as.data.frame(colSums(is.na(breaches))), col.names = c("Missing Values After Imputation"), caption = "Remaining Missing Values in Each Column")
 ```
 
@@ -180,7 +172,6 @@ breaches$date <- gsub("[0-9]", "", breaches$date)
 # Rename date column to month
 colnames(breaches)[4] <- "month"
 
-###head(breaches)
 kable(head(breaches), caption = "First Few Rows After Transformation")
 ```
 
@@ -190,8 +181,13 @@ breaches <- breaches %>%
   group_by(method, `data sensitivity`) %>%
   arrange(year)
 
-###head(breaches)
 kable(head(breaches), caption = "First Few Rows After Grouping and Arranging")
+```
+
+**Saving the Cleaned Dataset:** Finally, we save the cleaned dataset for further analysis and visualization.
+```{r}
+# Save the cleaned dataset
+write_csv(breaches, "dataset/cleaned_breaches.csv")
 ```
 
 # Conclusion
