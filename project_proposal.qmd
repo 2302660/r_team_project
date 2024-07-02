@@ -103,6 +103,8 @@ Our proposed enhancements aim to address the limitations of the original visuali
 
 5. **Legend and Annotations:** Include a legend to explain the meaning of bubble sizes and colours, providing context for users unfamiliar with the visualization. Add annotations to highlight significant breaches or trends, guiding users' attention to key insights.
 
+6. **Improved Scaling Factors:** Implement better scaling factors in logarithmic scale to accommodate a wider range of records, ensuring that small and large breaches are both visible and accurately represented.
+
 
 # Data Cleaning and Transformation
 
