@@ -64,7 +64,7 @@ The original visualization, shown in @fig-Figure_1, is a compelling graphical re
 
 Interactive elements allow users to explore detailed information about each breach, including the affected organization, the number of records lost, and the method of the breach. Interactive elements allow users to explore detailed information about each breach, including the affected organization, the number of records lost, and the method of the breach. This interactivity enhances the user's ability to analyze specific data points and discern patterns over time.
 
-![This bubble chart illustrates the scale and impact of major global data breaches, categorized by the organization and number of records lost. [@McCandlessEvans2024]](original_visualization.png){#fig-Figure_1}
+![This bubble chart illustrates the scale and impact of major global data breaches, categorized by the organization and number of records lost. [@McCandlessEvans2024]](original_visualization.png){width=80%, #fig-Figure_1}
 
 ## Critical Assessment 
 The original visualization excels in several areas but also presents certain limitations that could be addressed to enhance its utility and interpretability:
