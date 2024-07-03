@@ -3158,13 +3158,10 @@ vertical-align: -.125em;
 <section>
 <p>For this document, the following libraries are required:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(conflicted)  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(conflicted) </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Warning: package &#39;conflicted&#39; was built under R version 4.4.1</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package &#39;tidyverse&#39; was built under R version 4.4.1</code></pre>
+<pre><code>Warning: package &#39;stringr&#39; was built under R version 4.4.1</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
@@ -3174,7 +3171,10 @@ vertical-align: -.125em;
 ✔ lubridate 1.9.3     ✔ tidyr     1.3.1
 ✔ purrr     1.0.2     </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package &#39;knitr&#39; was built under R version 4.4.1</code></pre>
+</div>
 </div>
 </section>
 <section id="introduction" class="level1" data-number="1">
@@ -3246,21 +3246,13 @@ Figure 1: This bubble chart illustrates the scale and impact of major global da
 </section>
 <section id="data-cleaning-and-transformation" class="level1" data-number="4">
 <h1 data-number="4"><span class="header-section-number">4</span> Data Cleaning and Transformation</h1>
-<p>Utilizing <code>tidyverse</code> libraries, we will perform a series of data cleaning and transformation steps to prepare the data for analysis and visualization. These steps are crucial to ensure the accuracy and usability of the data.</p>
+<p>Utilizing the libraries, we will perform a series of data cleaning and transformation steps to prepare the data for analysis and visualization. These steps are crucial to ensure the accuracy and usability of the data.</p>
 <p><strong>Loading and Inspecting Data:</strong> First, we load the data and inspect it for any inconsistencies or missing values.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the data</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>breaches <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;dataset/IIB Data Breaches - LATEST - breaches.csv&quot;</span>, <span class="at">skip =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the data</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>breaches <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;dataset/IIB Data Breaches - LATEST - breaches.csv&quot;</span>,  <span class="at">show_col_types =</span> <span class="cn">FALSE</span>, <span class="at">skip =</span> <span class="dv">1</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>New names:
-Rows: 488 Columns: 16
-── Column specification
-──────────────────────────────────────────────────────── Delimiter: &quot;,&quot; chr
-(12): visualisation here: https://informationisbeautiful.net/visualizati... dbl
-(3): year story broke, 1. Just email address/Online information 2 SSN/... lgl
-(1): ...12
-ℹ Use `spec()` to retrieve the full column specification for this data. ℹ
-Specify the column types or set `show_col_types = FALSE` to quiet this message.
 • `` -&gt; `...2`
 • `` -&gt; `...5`
 • `` -&gt; `...6`
@@ -3272,7 +3264,9 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 • `` -&gt; `...15`
 • `` -&gt; `...16`</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(breaches)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(breaches)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 16
   visualisation here: ht…¹ ...2  (use 3m, 4m, 5m or 1…² `year story broke` ...5 
@@ -3284,20 +3278,20 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 5 Financial Business and … FBCS  3,200,000                            2024 Feb …
 6 Santander                &lt;NA&gt;  30,000,000                           2024 May …
 # ℹ abbreviated names:
-#   ¹​`visualisation here: https://informationisbeautiful.net/visualizations/worlds-biggest-data-breaches-hacks/\npink = new`,
+#   ¹​`visualisation here: https://informationisbeautiful.net/visualizations/worlds-biggest-data-breaches-hacks/\r\npink = new`,
 #   ²​`(use 3m, 4m, 5m or 10m to approximate unknown figures)`
 # ℹ 11 more variables: ...6 &lt;chr&gt;,
-#   `web\nhealthcare\napp\nretail\ngaming\ntransport\nfinancial\ntech\ngovernment\ntelecoms\nlegal\nmedia\nacademic\nenergy\nmilitary` &lt;chr&gt;,
-#   `poor security\nhacked\noops!\nlost device \ninside job` &lt;chr&gt;, ...9 &lt;chr&gt;,
-#   `1. Just email address/Online information \n2 SSN/Personal details \n3 Credit card information \n4 Health &amp; other personal records \n5 Full details` &lt;dbl&gt;, …</code></pre>
+#   `web\r\nhealthcare\r\napp\r\nretail\r\ngaming\r\ntransport\r\nfinancial\r\ntech\r\ngovernment\r\ntelecoms\r\nlegal\r\nmedia\r\nacademic\r\nenergy\r\nmilitary` &lt;chr&gt;,
+#   `poor security\r\nhacked\r\noops!\r\nlost device \r\ninside job` &lt;chr&gt;,
+#   ...9 &lt;chr&gt;, …</code></pre>
 </div>
 </div>
 <p><strong>Renaming Columns:</strong> We rename the columns to improve readability and consistency.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Rename column names</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(breaches) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;organisation&quot;</span>, <span class="st">&quot;alternative name&quot;</span>, <span class="st">&quot;records_lost&quot;</span>, <span class="st">&quot;year&quot;</span>, <span class="st">&quot;date&quot;</span>, <span class="st">&quot;story&quot;</span>, <span class="st">&quot;sector&quot;</span>, <span class="st">&quot;method&quot;</span>, <span class="st">&quot;interesting story&quot;</span>, <span class="st">&quot;data_sensitivity&quot;</span>, <span class="st">&quot;records&quot;</span>,<span class="st">&quot;nill&quot;</span>, <span class="st">&quot;source name&quot;</span>, <span class="st">&quot;source link&quot;</span>, <span class="st">&quot;source-1&quot;</span>, <span class="st">&quot;source-2&quot;</span>, <span class="st">&quot;id&quot;</span>)</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">as.data.frame</span>(<span class="fu">colnames</span>(breaches)), <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&quot;Column Names&quot;</span>), <span class="at">caption =</span> <span class="st">&quot;Renamed Columns&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Rename column names</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(breaches) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;organisation&quot;</span>, <span class="st">&quot;alternative name&quot;</span>, <span class="st">&quot;records_lost&quot;</span>, <span class="st">&quot;year&quot;</span>, <span class="st">&quot;date&quot;</span>, <span class="st">&quot;story&quot;</span>, <span class="st">&quot;sector&quot;</span>, <span class="st">&quot;method&quot;</span>, <span class="st">&quot;interesting story&quot;</span>, <span class="st">&quot;data_sensitivity&quot;</span>, <span class="st">&quot;records&quot;</span>,<span class="st">&quot;nill&quot;</span>, <span class="st">&quot;source name&quot;</span>, <span class="st">&quot;source_link&quot;</span>, <span class="st">&quot;source-1&quot;</span>, <span class="st">&quot;source-2&quot;</span>, <span class="st">&quot;id&quot;</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">as.data.frame</span>(<span class="fu">colnames</span>(breaches)), <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&quot;Column Names&quot;</span>), <span class="at">caption =</span> <span class="st">&quot;Renamed Columns&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
 <caption>Renamed Columns</caption>
@@ -3347,7 +3341,7 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 <td style="text-align: left;">source name</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">source link</td>
+<td style="text-align: left;">source_link</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">source-1</td>
@@ -3359,12 +3353,12 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 </table>
 </div>
 </div>
-<p><strong>Selecting Relevant Columns:</strong> We select the necessary columns for analysis, including organization, records lost, year, date, story, sector, method, data sensitivity, and source link.</p>
+<p><strong>Selecting Relevant Columns:</strong> We select the necessary columns for analysis, including organization, records_lost, year, date, story, sector, method, data_sensitivity, and source_link.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Necessary columns</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>breaches <span class="ot">&lt;-</span> <span class="fu">select</span>(breaches, <span class="st">`</span><span class="at">organisation</span><span class="st">`</span>,  <span class="st">`</span><span class="at">records_lost</span><span class="st">`</span>, <span class="st">`</span><span class="at">year</span><span class="st">`</span>, <span class="st">`</span><span class="at">date</span><span class="st">`</span>, <span class="st">`</span><span class="at">story</span><span class="st">`</span>, <span class="st">`</span><span class="at">sector</span><span class="st">`</span>, <span class="st">`</span><span class="at">method</span><span class="st">`</span>,  <span class="st">`</span><span class="at">data_sensitivity</span><span class="st">`</span>, <span class="st">`</span><span class="at">source link</span><span class="st">`</span>)</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">as.data.frame</span>(<span class="fu">colnames</span>(breaches)), <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&quot;Selected Column Names&quot;</span>), <span class="at">caption =</span> <span class="st">&quot;Selected Columns&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Necessary columns</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>breaches <span class="ot">&lt;-</span> <span class="fu">select</span>(breaches, <span class="st">`</span><span class="at">organisation</span><span class="st">`</span>,  <span class="st">`</span><span class="at">records_lost</span><span class="st">`</span>, <span class="st">`</span><span class="at">year</span><span class="st">`</span>, <span class="st">`</span><span class="at">date</span><span class="st">`</span>, <span class="st">`</span><span class="at">story</span><span class="st">`</span>, <span class="st">`</span><span class="at">sector</span><span class="st">`</span>, <span class="st">`</span><span class="at">method</span><span class="st">`</span>,  <span class="st">`</span><span class="at">data_sensitivity</span><span class="st">`</span>, <span class="st">`</span><span class="at">source_link</span><span class="st">`</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">as.data.frame</span>(<span class="fu">colnames</span>(breaches)), <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&quot;Selected Column Names&quot;</span>), <span class="at">caption =</span> <span class="st">&quot;Selected Columns&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
 <caption>Selected Columns</caption>
@@ -3399,42 +3393,76 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 <td style="text-align: left;">data_sensitivity</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">source link</td>
+<td style="text-align: left;">source_link</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
-<p><strong>Changing Columns Data Type:</strong> We change the data type for data integrity and performance. Also, allowing plot library to safely use the data without any errors.</p>
+<p><strong>Changing Columns’ Data Type:</strong> We change the data type for data integrity and performance. Also, allowing plot library to safely use the data without any errors.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>breaches <span class="ot">&lt;-</span> breaches <span class="sc">%&gt;%</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">year =</span> <span class="fu">as.numeric</span>(year),</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">records_lost =</span> <span class="fu">as.numeric</span>(<span class="fu">gsub</span>(<span class="st">&quot;[^0-9]&quot;</span>, <span class="st">&quot;&quot;</span>, records_lost))</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>breaches</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 488 × 9
-   organisation    records_lost  year date  story sector method data_sensitivity
-   &lt;chr&gt;                  &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;             &lt;dbl&gt;
- 1 Kaiser Permane…     13400000  2024 Apr … A le… health oops!                 3
- 2 Ticketmaster       560000000  2024 Jun … Hack… media  hacked                3
- 3 Stanford Unive…        27000  2023 May … The … acade… hacked                2
- 4 Cooler Master         500000  2024 May … Thre… tech   hacked                2
- 5 Financial Busi…      3200000  2024 Feb … A U.… tech   hacked                2
- 6 Santander           30000000  2024 May … Thre… finan… hacked                3
- 7 Everbridge           5600000  2024 May … The … tech   hacked                1
- 8 BBC                    25000  2024 May … Pers… media  hacked                2
- 9 First American         44000  2023 Dec … The … finan… hacked                2
-10 Christie&#39;s            500000  2024 May … Famo… retail hacked                2
-# ℹ 478 more rows
-# ℹ 1 more variable: `source link` &lt;chr&gt;</code></pre>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Change data types</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>breaches <span class="ot">&lt;-</span> breaches <span class="sc">%&gt;%</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">year =</span> <span class="fu">as.numeric</span>(year),</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">records_lost =</span> <span class="fu">as.numeric</span>(<span class="fu">gsub</span>(<span class="st">&quot;[^0-9]&quot;</span>, <span class="st">&quot;&quot;</span>, records_lost))</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">as.data.frame</span>(<span class="fu">sapply</span>(breaches, class)), <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&quot;Data Types&quot;</span>), <span class="at">caption =</span> <span class="st">&quot;Data Types of Columns&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<caption>Data Types of Columns</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: left;">Data Types</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">organisation</td>
+<td style="text-align: left;">character</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">records_lost</td>
+<td style="text-align: left;">numeric</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">year</td>
+<td style="text-align: left;">numeric</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">date</td>
+<td style="text-align: left;">character</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">story</td>
+<td style="text-align: left;">character</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">sector</td>
+<td style="text-align: left;">character</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">method</td>
+<td style="text-align: left;">character</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">data_sensitivity</td>
+<td style="text-align: left;">numeric</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">source_link</td>
+<td style="text-align: left;">character</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <p><strong>Handling Missing Values:</strong> We check for missing values and duplicates in the dataset and address them using appropriate imputation, filter or removal techniques.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check for missing values</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">as.data.frame</span>(<span class="fu">colSums</span>(<span class="fu">is.na</span>(breaches))), <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&quot;Missing Values&quot;</span>), <span class="at">caption =</span> <span class="st">&quot;Missing Values in Each Column&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check for missing values</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">as.data.frame</span>(<span class="fu">colSums</span>(<span class="fu">is.na</span>(breaches))), <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&quot;Missing Values&quot;</span>), <span class="at">caption =</span> <span class="st">&quot;Missing Values in Each Column&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
 <caption>Missing Values in Each Column</caption>
@@ -3478,7 +3506,7 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 <td style="text-align: right;">1</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">source link</td>
+<td style="text-align: left;">source_link</td>
 <td style="text-align: right;">1</td>
 </tr>
 </tbody>
@@ -3486,10 +3514,10 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check for duplicates</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>duplicates <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">duplicated</span>(breaches))</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">as.data.frame</span>(duplicates), <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&quot;Number of Duplicates&quot;</span>), <span class="at">caption =</span> <span class="st">&quot;Number of Duplicate Rows&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check for duplicates</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>duplicates <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">duplicated</span>(breaches))</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">as.data.frame</span>(duplicates), <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&quot;Number of Duplicates&quot;</span>), <span class="at">caption =</span> <span class="st">&quot;Number of Duplicate Rows&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
 <caption>Number of Duplicate Rows</caption>
@@ -3507,19 +3535,19 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove missing values in data sensitivity with median imputation</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>breaches <span class="ot">&lt;-</span> breaches <span class="sc">%&gt;%</span> </span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">data_sensitivity</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(<span class="st">`</span><span class="at">data_sensitivity</span><span class="st">`</span>), <span class="fu">median</span>(<span class="st">`</span><span class="at">data_sensitivity</span><span class="st">`</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="st">`</span><span class="at">data_sensitivity</span><span class="st">`</span>))</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove missing values in story</span></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>breaches <span class="ot">&lt;-</span> breaches <span class="sc">%&gt;%</span> </span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(story))</span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove missing values in source link</span></span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>breaches <span class="ot">&lt;-</span> breaches <span class="sc">%&gt;%</span> </span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(<span class="st">`</span><span class="at">source link</span><span class="st">`</span>))</span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">as.data.frame</span>(<span class="fu">colSums</span>(<span class="fu">is.na</span>(breaches))), <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&quot;Missing Values After Imputation&quot;</span>), <span class="at">caption =</span> <span class="st">&quot;Remaining Missing Values in Each Column&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove missing values in data_sensitivity with median imputation</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>breaches <span class="ot">&lt;-</span> breaches <span class="sc">%&gt;%</span> </span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">data_sensitivity</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(<span class="st">`</span><span class="at">data_sensitivity</span><span class="st">`</span>), <span class="fu">median</span>(<span class="st">`</span><span class="at">data_sensitivity</span><span class="st">`</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="st">`</span><span class="at">data_sensitivity</span><span class="st">`</span>))</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove missing values in story</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>breaches <span class="ot">&lt;-</span> breaches <span class="sc">%&gt;%</span> </span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(story))</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove missing values in source_link</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>breaches <span class="ot">&lt;-</span> breaches <span class="sc">%&gt;%</span> </span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(<span class="st">`</span><span class="at">source_link</span><span class="st">`</span>))</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">as.data.frame</span>(<span class="fu">colSums</span>(<span class="fu">is.na</span>(breaches))), <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&quot;Missing Values After Imputation&quot;</span>), <span class="at">caption =</span> <span class="st">&quot;Remaining Missing Values in Each Column&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
 <caption>Remaining Missing Values in Each Column</caption>
@@ -3563,7 +3591,7 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">source link</td>
+<td style="text-align: left;">source_link</td>
 <td style="text-align: right;">0</td>
 </tr>
 </tbody>
@@ -3572,13 +3600,13 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 </div>
 <p><strong>Data Transformation:</strong> We transform the data to make it more suitable for analysis and visualization. This includes converting data types, combining columns, and creating new variables.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove numbers in date column and update in dataset</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>breaches<span class="sc">$</span>date <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;[0-9]&quot;</span>, <span class="st">&quot;&quot;</span>, breaches<span class="sc">$</span>date)</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Rename date column to month</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(breaches)[<span class="dv">4</span>] <span class="ot">&lt;-</span> <span class="st">&quot;month&quot;</span></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">head</span>(breaches), <span class="at">caption =</span> <span class="st">&quot;First Few Rows After Transformation&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove numbers in date column and update in dataset</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>breaches<span class="sc">$</span>date <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;[0-9]&quot;</span>, <span class="st">&quot;&quot;</span>, breaches<span class="sc">$</span>date)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Rename date column to month</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(breaches)[<span class="dv">4</span>] <span class="ot">&lt;-</span> <span class="st">&quot;month&quot;</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">head</span>(breaches), <span class="at">caption =</span> <span class="st">&quot;First Few Rows After Transformation&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
 <caption>First Few Rows After Transformation</caption>
@@ -3603,7 +3631,7 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 <th style="text-align: left;">sector</th>
 <th style="text-align: left;">method</th>
 <th style="text-align: right;">data_sensitivity</th>
-<th style="text-align: left;">source link</th>
+<th style="text-align: left;">source_link</th>
 </tr>
 </thead>
 <tbody>
@@ -3678,12 +3706,12 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Group breaches by method and data sensitivity and arrange by year</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>breaches <span class="ot">&lt;-</span> breaches <span class="sc">%&gt;%</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(method, <span class="st">`</span><span class="at">data_sensitivity</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(year)</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">head</span>(breaches), <span class="at">caption =</span> <span class="st">&quot;First Few Rows After Grouping and Arranging&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Group breaches by method and data_sensitivity and arrange by year</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>breaches <span class="ot">&lt;-</span> breaches <span class="sc">%&gt;%</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(method, <span class="st">`</span><span class="at">data_sensitivity</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(year)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">head</span>(breaches), <span class="at">caption =</span> <span class="st">&quot;First Few Rows After Grouping and Arranging&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
 <caption>First Few Rows After Grouping and Arranging</caption>
@@ -3708,7 +3736,7 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 <th style="text-align: left;">sector</th>
 <th style="text-align: left;">method</th>
 <th style="text-align: right;">data_sensitivity</th>
-<th style="text-align: left;">source link</th>
+<th style="text-align: left;">source_link</th>
 </tr>
 </thead>
 <tbody>
@@ -3784,8 +3812,8 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 </div>
 <p><strong>Saving the Cleaned Dataset:</strong> Finally, we save the cleaned dataset for further analysis and visualization.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save the cleaned dataset</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(breaches, <span class="st">&quot;dataset/cleaned_breaches.csv&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save the cleaned dataset</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(breaches, <span class="st">&quot;dataset/cleaned_breaches.csv&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="conclusion" class="level1" data-number="5">

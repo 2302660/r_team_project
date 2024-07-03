@@ -40,7 +40,7 @@ Authors
 For this document, the following libraries are required:
 
 ```{r}
-library(conflicted)  
+library(conflicted) 
 library(tidyverse)
 library(knitr)
 ```
@@ -112,41 +112,44 @@ Our proposed enhancements aim to address the limitations of the original visuali
 
 # Data Cleaning and Transformation
 
-Utilizing `tidyverse` libraries, we will perform a series of data cleaning and transformation steps to prepare the data for analysis and visualization. These steps are crucial to ensure the accuracy and usability of the data.
+Utilizing the libraries, we will perform a series of data cleaning and transformation steps to prepare the data for analysis and visualization. These steps are crucial to ensure the accuracy and usability of the data.
 
 **Loading and Inspecting Data:** First, we load the data and inspect it for any inconsistencies or missing values.
 
 ```{r}
 # Load the data
-breaches <- read_csv("dataset/IIB Data Breaches - LATEST - breaches.csv", skip = 1)
-
+breaches <- read_csv("dataset/IIB Data Breaches - LATEST - breaches.csv",  show_col_types = FALSE, skip = 1) 
+```
+```{r}
 head(breaches)
 ```
 
 **Renaming Columns:** We rename the columns to improve readability and consistency.
 ```{r}
 # Rename column names
-colnames(breaches) <- c("organisation", "alternative name", "records_lost", "year", "date", "story", "sector", "method", "interesting story", "data_sensitivity", "records","nill", "source name", "source link", "source-1", "source-2", "id")
+colnames(breaches) <- c("organisation", "alternative name", "records_lost", "year", "date", "story", "sector", "method", "interesting story", "data_sensitivity", "records","nill", "source name", "source_link", "source-1", "source-2", "id")
 
 kable(as.data.frame(colnames(breaches)), col.names = c("Column Names"), caption = "Renamed Columns")
 ```
 
-**Selecting Relevant Columns:** We select the necessary columns for analysis, including organization, records lost, year, date, story, sector, method, data sensitivity, and source link.
+**Selecting Relevant Columns:** We select the necessary columns for analysis, including organization, records_lost, year, date, story, sector, method, data_sensitivity, and source_link.
 ```{r}
 # Necessary columns
-breaches <- select(breaches, `organisation`,  `records_lost`, `year`, `date`, `story`, `sector`, `method`,  `data_sensitivity`, `source link`)
+breaches <- select(breaches, `organisation`,  `records_lost`, `year`, `date`, `story`, `sector`, `method`,  `data_sensitivity`, `source_link`)
 
 kable(as.data.frame(colnames(breaches)), col.names = c("Selected Column Names"), caption = "Selected Columns")
 ```
 
-**Changing Columns Data Type:** We change the data type for data integrity and performance. Also, allowing plot library to safely use the data without any errors.
+**Changing Columns' Data Type:** We change the data type for data integrity and performance. Also, allowing plot library to safely use the data without any errors.
 ```{r}
+# Change data types
 breaches <- breaches %>%
   mutate(
     year = as.numeric(year),
     records_lost = as.numeric(gsub("[^0-9]", "", records_lost))
   )
-breaches
+
+kable(as.data.frame(sapply(breaches, class)), col.names = c("Data Types"), caption = "Data Types of Columns")
 ```
 
 **Handling Missing Values:** We check for missing values and duplicates in the dataset and address them using appropriate imputation, filter or removal techniques.
@@ -163,7 +166,7 @@ kable(as.data.frame(duplicates), col.names = c("Number of Duplicates"), caption 
 ```
 
 ```{r}
-# Remove missing values in data sensitivity with median imputation
+# Remove missing values in data_sensitivity with median imputation
 breaches <- breaches %>% 
   mutate(`data_sensitivity` = ifelse(is.na(`data_sensitivity`), median(`data_sensitivity`, na.rm = TRUE), `data_sensitivity`))
 
@@ -171,9 +174,9 @@ breaches <- breaches %>%
 breaches <- breaches %>% 
   dplyr::filter(!is.na(story))
 
-# Remove missing values in source link
+# Remove missing values in source_link
 breaches <- breaches %>% 
-  dplyr::filter(!is.na(`source link`))
+  dplyr::filter(!is.na(`source_link`))
 
 kable(as.data.frame(colSums(is.na(breaches))), col.names = c("Missing Values After Imputation"), caption = "Remaining Missing Values in Each Column")
 ```
@@ -190,7 +193,7 @@ kable(head(breaches), caption = "First Few Rows After Transformation")
 ```
 
 ```{r}
-# Group breaches by method and data sensitivity and arrange by year
+# Group breaches by method and data_sensitivity and arrange by year
 breaches <- breaches %>%
   group_by(method, `data_sensitivity`) %>%
   arrange(year)
