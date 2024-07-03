@@ -1,5 +1,5 @@
 ---
-title: "Team 9 Project Proposal"
+title: "Team 9 - Project Proposal"
 bibliography: references.bib
 
 format: 
@@ -15,7 +15,7 @@ format:
 ---
 
 ::: {.lead .subtitle}
-Visualizing World's Biggest Data Breaches and Hacks Over Time
+**Visualizing World's Biggest Data Breaches and Hacks Over Time**
 :::
 
 ::: {#authors_container}
@@ -196,7 +196,7 @@ write_csv(breaches, "dataset/cleaned_breaches.csv")
 
 # Conclusion
 
-The data is now ready for visualization. The next step will be to create a series of plots that can effectively communicate the scale and impact of the world's biggest data breaches over time, and additionally allow stakeholders to explore the nuances of these breaches through interactive elements. We will use the `ggplot2` package to create the initial static visualizations, which will then be enhanced with interactivity using the `plotly` package. This approach will provide both a detailed overview and an in-depth analysis capability, fostering a deeper understanding of data breaches and their broader implications.
+The data is now ready for visualization. The next step will be to create a series of plots that can effectively communicate the scale and impact of the world's biggest data breaches over time, and additionally allow stakeholders to explore the nuances of these breaches through interactive elements. We will use the `ggplot2` package to create the initial static visualizations, which will then be enhanced with interactivity using the `shiny` and/or  `plotly` package. This approach will provide both a detailed overview and an in-depth analysis capability, fostering a deeper understanding of data breaches and their broader implications.
 
 
 
