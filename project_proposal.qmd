@@ -126,7 +126,7 @@ head(breaches)
 **Renaming Columns:** We rename the columns to improve readability and consistency.
 ```{r}
 # Rename column names
-colnames(breaches) <- c("organisation", "alternative name", "records lost", "year", "date", "story", "sector", "method", "interesting story", "data sensitivity", "records","nill", "source name", "source link", "source-1", "source-2", "id")
+colnames(breaches) <- c("organisation", "alternative name", "records_lost", "year", "date", "story", "sector", "method", "interesting story", "data_sensitivity", "records","nill", "source name", "source link", "source-1", "source-2", "id")
 
 kable(as.data.frame(colnames(breaches)), col.names = c("Column Names"), caption = "Renamed Columns")
 ```
@@ -134,9 +134,19 @@ kable(as.data.frame(colnames(breaches)), col.names = c("Column Names"), caption 
 **Selecting Relevant Columns:** We select the necessary columns for analysis, including organization, records lost, year, date, story, sector, method, data sensitivity, and source link.
 ```{r}
 # Necessary columns
-breaches <- select(breaches, `organisation`,  `records lost`, `year`, `date`, `story`, `sector`, `method`,  `data sensitivity`, `source link`)
+breaches <- select(breaches, `organisation`,  `records_lost`, `year`, `date`, `story`, `sector`, `method`,  `data_sensitivity`, `source link`)
 
 kable(as.data.frame(colnames(breaches)), col.names = c("Selected Column Names"), caption = "Selected Columns")
+```
+
+**Changing Columns Data Type:** We change the data type for data integrity and performance. Also, allowing plot library to safely use the data without any errors.
+```{r}
+breaches <- breaches %>%
+  mutate(
+    year = as.numeric(year),
+    records_lost = as.numeric(gsub("[^0-9]", "", records_lost))
+  )
+breaches
 ```
 
 **Handling Missing Values:** We check for missing values and duplicates in the dataset and address them using appropriate imputation, filter or removal techniques.
@@ -155,7 +165,7 @@ kable(as.data.frame(duplicates), col.names = c("Number of Duplicates"), caption 
 ```{r}
 # Remove missing values in data sensitivity with median imputation
 breaches <- breaches %>% 
-  mutate(`data sensitivity` = ifelse(is.na(`data sensitivity`), median(`data sensitivity`, na.rm = TRUE), `data sensitivity`))
+  mutate(`data_sensitivity` = ifelse(is.na(`data_sensitivity`), median(`data_sensitivity`, na.rm = TRUE), `data_sensitivity`))
 
 # Remove missing values in story
 breaches <- breaches %>% 
@@ -182,7 +192,7 @@ kable(head(breaches), caption = "First Few Rows After Transformation")
 ```{r}
 # Group breaches by method and data sensitivity and arrange by year
 breaches <- breaches %>%
-  group_by(method, `data sensitivity`) %>%
+  group_by(method, `data_sensitivity`) %>%
   arrange(year)
 
 kable(head(breaches), caption = "First Few Rows After Grouping and Arranging")
