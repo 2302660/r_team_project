@@ -110,9 +110,9 @@ Our proposed enhancements aim to address the limitations of the original visuali
 6. **Improved Scaling Factors:** Implement better scaling factors in logarithmic scale to accommodate a wider range of records, ensuring that small and large breaches are both visible and accurately represented.
 
 
-# Data Cleaning and Transformation
+# Data Cleaning 
 
-Utilizing the libraries, we will perform a series of data cleaning and transformation steps to prepare the data for analysis and visualization. These steps are crucial to ensure the accuracy and usability of the data.
+Utilizing the libraries, we will perform a series of data cleaning steps to prepare the data for analysis and visualization. These steps are crucial to ensure the accuracy and usability of the data.
 
 **Loading and Inspecting Data:** First, we load the data and inspect it for any inconsistencies or missing values.
 
@@ -181,7 +181,7 @@ breaches <- breaches %>%
 kable(as.data.frame(colSums(is.na(breaches))), col.names = c("Missing Values After Imputation"), caption = "Remaining Missing Values in Each Column")
 ```
 
-**Data Transformation:** We transform the data to make it more suitable for analysis and visualization. This includes converting data types, combining columns, and creating new variables.
+**Amending Date Column:** We remove numbers from the date column to standardize the format and rename it to month for clarity.
 ```{r}
 # Remove numbers in date column and update in dataset
 breaches$date <- gsub("[0-9]", "", breaches$date)
@@ -192,6 +192,7 @@ colnames(breaches)[4] <- "month"
 kable(head(breaches), caption = "First Few Rows After Transformation")
 ```
 
+**Grouping and Arranging Data:** We group the breaches by method and data_sensitivity and arrange them by year to facilitate further analysis.
 ```{r}
 # Group breaches by method and data_sensitivity and arrange by year
 breaches <- breaches %>%
