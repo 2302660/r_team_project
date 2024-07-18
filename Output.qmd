@@ -41,12 +41,12 @@ data_2024 <- data_2024 %>%
   mutate(name = fct_reorder(organisation, records_lost_m)) # to order the data in the graph
 
   ggplot(data_2024, aes(x=name, y=records_lost_m)) +
-  geom_segment( aes(x=name, xend=organisation, y=0, yend=records_lost_m)) +
-  geom_point(size=4, alpha=0.6, color="orange") +
-  scale_y_log10(labels = label_number()) +
-  coord_flip() +
-  theme_bw() +
-  xlab("")
+      geom_segment( aes(x=name, xend=organisation, y=0, yend=records_lost_m)) +
+      geom_point(size=4, alpha=0.6, color="orange") +
+      scale_y_log10(labels = label_number()) +
+      coord_flip() +
+      theme_bw() +
+      xlab("")
 
 ```
 
@@ -57,8 +57,9 @@ data_2024 <- data_2024 %>%
 # order data function data_2024 <- data_2024 %>% 
 # mutate(name = fct_reorder(organisation, records_lost_m)) # to order the data in the graph
 
+# add data ranking, if more 2 same organisation in the same year, then add together.
+
 # SHINY APP
-yearFilter <- unique(data$year)
 sectorFilter <- c(unique(data$sector),"All")
 
 ui <- fluidPage(
@@ -69,25 +70,29 @@ ui <- fluidPage(
   sidebarLayout(
     sidebarPanel(
       # inputs
-      selectInput("Year", "Filter by Year", yearFilter, selected = 2024),
-      selectInput("Sector", "Filter by Sector", sectorFilter, selected = "All"),
+      selectInput("Year", "Filter by Year", choices = unique(data$year), selected = 2024),
+      sliderInput("val_top", "Show the top n Records:", min = 1, max = 30, value = 10, step = 1),
+      
       # Data information when you hover etc.
       verbatimTextOutput("info"),
     ),
     mainPanel(
+      plotOutput("plot", width = "900px", height = "600px", click= "plot_click"),
       verbatimTextOutput("summary"),
-      plotOutput("plot", width = "900px", click= "plot_click")
     )
   )
 )
 
 server <- function(input, output, session) {
-  dataset <- reactive({ #reactive functions run when the assigned inputs change
-    data <- data %>% filter(year == input$Year)
-  })
-  
   output$plot <- renderPlot({
-     ggplot(data_2024, aes(x=name, y=records_lost_m)) +
+    
+    data_plot <- data %>% filter(year == input$Year) %>%
+      mutate(name = fct_reorder(organisation, records_lost_m)) %>%
+      mutate(Rank = rank(-records_lost_m, ties.method = "average")) %>%
+      arrange(Rank) %>%
+      head(input$val_top)
+    
+     ggplot(data_plot, aes(x=name, y=records_lost_m)) +
       geom_segment( aes(x=name, xend=organisation, y=0, yend=records_lost_m)) +
       geom_point(size=4, alpha=0.6, color="orange") +
       scale_y_log10(labels = label_number()) +
@@ -97,10 +102,25 @@ server <- function(input, output, session) {
   }, res = 96)
   
   output$info <- renderText({
-    #default value
+    ranked_data <- data %>% filter(year == input$Year) %>% 
+      mutate(name = fct_reorder(organisation, records_lost_m)) %>%
+      mutate(Rank = rank(-records_lost_m, ties.method = "average")) %>% 
+      # sort by rank
+      arrange(Rank) %>%
+      # get ranks 1-10
+      head(input$val_top)
+    
+    # Create a text representation of the top 10
+    top_10_text <- ranked_data %>%
+      mutate(Info = paste(Rank, ": ", name, " - Records Lost (M): ", records_lost_m)) %>%
+      pull(Info) %>%
+      paste(collapse = "\n")
+    
+    # Combine with the default value
     paste0(
       "Year: 2024", "\n",
-      "Total Records Lost (M): ", sum(data_2024$records_lost_m), "\n",
+      "Total Records Lost (M): ", sum(ranked_data$records_lost_m), "\n\n",
+      "Top 10 Rankings:\n", top_10_text
     )
   })
   
