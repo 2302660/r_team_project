@@ -1,0 +1,113 @@
+``` {r}
+library(tidyverse)
+library(plotly)
+library(shiny)
+library(scales)
+```
+
+``` {r}
+# Load data
+data <- read_csv("C:/Users/ahali/OneDrive - Singapore Institute Of Technology/r_team_project/dataset/cleaned_breaches.csv")
+
+```
+
+``` {r}
+
+#remove commas
+data$`records lost` <- gsub(",", "", data$`records lost`)
+data$`records lost` <- gsub(";", "", data$`records lost`)
+
+# convert chr to numeric
+data$`records lost` <- as.integer(data$`records lost`)
+
+# mutate match month.abb with data$month into a new column
+data <- data %>% mutate(month.abb = match(data$month, month.abb))
+data <- data %>% mutate(records_lost_m = `records lost` / 1000000)
+data <- data %>% mutate(records_lost_k = `records lost` / 1000)
+
+head(data)
+
+data_2024 <- data %>% filter(year == 2024)
+
+head(data_2024)
+
+```
+
+``` {r}
+
+head(data_2024)
+
+data_2024 <- data_2024 %>% 
+  mutate(name = fct_reorder(organisation, records_lost_m)) # to order the data in the graph
+
+  ggplot(data_2024, aes(x=name, y=records_lost_m)) +
+  geom_segment( aes(x=name, xend=organisation, y=0, yend=records_lost_m)) +
+  geom_point(size=4, alpha=0.6, color="orange") +
+  scale_y_log10(labels = label_number()) +
+  coord_flip() +
+  theme_bw() +
+  xlab("")
+
+```
+
+``` {r}
+
+# Display ranking and statistics on info. Enable filtering functionality. 
+
+# order data function data_2024 <- data_2024 %>% 
+# mutate(name = fct_reorder(organisation, records_lost_m)) # to order the data in the graph
+
+# SHINY APP
+yearFilter <- unique(data$year)
+sectorFilter <- c(unique(data$sector),"All")
+
+ui <- fluidPage(
+  theme = bslib::bs_theme(bootswatch = "flatly"),
+  titlePanel(
+    "Data Breaches in History"
+  ),
+  sidebarLayout(
+    sidebarPanel(
+      # inputs
+      selectInput("Year", "Filter by Year", yearFilter, selected = 2024),
+      selectInput("Sector", "Filter by Sector", sectorFilter, selected = "All"),
+      # Data information when you hover etc.
+      verbatimTextOutput("info"),
+    ),
+    mainPanel(
+      verbatimTextOutput("summary"),
+      plotOutput("plot", width = "900px", click= "plot_click")
+    )
+  )
+)
+
+server <- function(input, output, session) {
+  dataset <- reactive({ #reactive functions run when the assigned inputs change
+    data <- data %>% filter(year == input$Year)
+  })
+  
+  output$plot <- renderPlot({
+     ggplot(data_2024, aes(x=name, y=records_lost_m)) +
+      geom_segment( aes(x=name, xend=organisation, y=0, yend=records_lost_m)) +
+      geom_point(size=4, alpha=0.6, color="orange") +
+      scale_y_log10(labels = label_number()) +
+      coord_flip() +
+      theme_bw() +
+      xlab("")
+  }, res = 96)
+  
+  output$info <- renderText({
+    #default value
+    paste0(
+      "Year: 2024", "\n",
+      "Total Records Lost (M): ", sum(data_2024$records_lost_m), "\n",
+    )
+  })
+  
+}
+
+shinyApp(ui, server)
+
+
+
+```
