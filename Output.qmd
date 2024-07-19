@@ -7,23 +7,23 @@ library(scales)
 
 ``` {r}
 # Load data
-data <- read_csv("C:/Users/ahali/OneDrive - Singapore Institute Of Technology/r_team_project/dataset/cleaned_breaches.csv")
+data <- read_csv("dataset/cleaned_breaches.csv")
 
 ```
 
 ``` {r}
 
 #remove commas
-data$`records lost` <- gsub(",", "", data$`records lost`)
-data$`records lost` <- gsub(";", "", data$`records lost`)
+data$`records_lost` <- gsub(",", "", data$`records_lost`)
+data$`records_lost` <- gsub(";", "", data$`records_lost`)
 
 # convert chr to numeric
-data$`records lost` <- as.integer(data$`records lost`)
+data$`records_lost` <- as.integer(data$`records_lost`)
 
 # mutate match month.abb with data$month into a new column
 data <- data %>% mutate(month.abb = match(data$month, month.abb))
-data <- data %>% mutate(records_lost_m = `records lost` / 1000000)
-data <- data %>% mutate(records_lost_k = `records lost` / 1000)
+data <- data %>% mutate(records_lost_m = `records_lost` / 1000000)
+data <- data %>% mutate(records_lost_k = `records_lost` / 1000)
 
 head(data)
 
@@ -42,10 +42,10 @@ data_2024 <- data_2024 %>%
 
   ggplot(data_2024, aes(x=name, y=records_lost_m)) +
       geom_segment( aes(x=name, xend=organisation, y=0, yend=records_lost_m)) +
-      geom_point(size=4, alpha=0.6, color="orange") +
+      geom_point(size=4, alpha=0.6, color= "orange") +
       scale_y_log10(labels = label_number()) +
       coord_flip() +
-      theme_bw() +
+      theme_gray() +
       xlab("")
 
 ```
@@ -97,7 +97,7 @@ server <- function(input, output, session) {
       geom_point(size=4, alpha=0.6, color="orange") +
       scale_y_log10(labels = label_number()) +
       coord_flip() +
-      theme_bw() +
+      theme_gray() +
       xlab("")
   }, res = 96)
   
