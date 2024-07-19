@@ -1,6 +1,5 @@
 ``` {r}
 library(tidyverse)
-library(plotly)
 library(shiny)
 library(scales)
 ```
@@ -45,8 +44,7 @@ data_2024 <- data_2024 %>%
       geom_point(size=4, alpha=0.6, color= "orange") +
       scale_y_log10(labels = label_number()) +
       coord_flip() +
-      theme_gray() +
-      xlab("")
+      theme_gray() 
 
 ```
 
@@ -96,9 +94,9 @@ server <- function(input, output, session) {
       geom_segment( aes(x=name, xend=organisation, y=0, yend=records_lost_m)) +
       geom_point(size=4, alpha=0.6, color="orange") +
       scale_y_log10(labels = label_number()) +
+      labs(title = "Data Breach Overview", x = "Organisations", y = "Records Lost (in millions)") +
       coord_flip() +
-      theme_gray() +
-      xlab("")
+      theme_gray() 
   }, res = 96)
   
   output$info <- renderText({
@@ -112,14 +110,14 @@ server <- function(input, output, session) {
     
     # Create a text representation of the top 10
     top_10_text <- ranked_data %>%
-      mutate(Info = paste(Rank, ": ", name, " - Records Lost (M): ", records_lost_m)) %>%
+      mutate(Info = paste(Rank, ": ", name, " - Records Lost (in Millions): ", records_lost_m)) %>%
       pull(Info) %>%
       paste(collapse = "\n")
     
     # Combine with the default value
     paste0(
       "Year: 2024", "\n",
-      "Total Records Lost (M): ", sum(ranked_data$records_lost_m), "\n\n",
+      "Total Records Lost (in Millions): ", sum(ranked_data$records_lost_m), "\n\n",
       "Top 10 Rankings:\n", top_10_text
     )
   })
