@@ -116,7 +116,7 @@ server <- function(input, output, session) {
     
     # Combine with the default value
     paste0(
-      "Year: 2024", "\n",
+      "Year: ", input$Year,  "\n",
       "Total Records Lost (in Millions): ", sum(ranked_data$records_lost_m), "\n\n",
       "Top 10 Rankings:\n", top_10_text
     )
