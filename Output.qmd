@@ -36,73 +36,96 @@ head(data_2024)
 
 head(data_2024)
 
-data_2024 <- data_2024 %>% 
+data_2024 <- data_2024 %>%
   mutate(name = fct_reorder(organisation, records_lost_m)) # to order the data in the graph
 
-  ggplot(data_2024, aes(x=name, y=records_lost_m)) +
-      geom_segment( aes(x=name, xend=organisation, y=0, yend=records_lost_m)) +
-      geom_point(size=4, alpha=0.6, color= "orange") +
-      scale_y_log10(labels = label_number()) +
-      coord_flip() +
-      theme_gray() 
+ggplot(data_2024, aes(x = name, y = records_lost_m)) +
+  geom_segment(aes(
+    x = name,
+    xend = organisation,
+    y = 0,
+    yend = records_lost_m
+  )) +
+  geom_point(size = 4,
+             alpha = 0.6,
+             color = "orange") +
+  scale_y_log10(labels = label_number()) +
+  coord_flip() +
+  theme_gray()
 
 ```
 
 ``` {r}
 
-# Display ranking and statistics on info. Enable filtering functionality. 
-
-# order data function data_2024 <- data_2024 %>% 
-# mutate(name = fct_reorder(organisation, records_lost_m)) # to order the data in the graph
-
-# add data ranking, if more 2 same organisation in the same year, then add together.
-
 # SHINY APP
-sectorFilter <- c(unique(data$sector),"All")
+sectorFilter <- c(unique(data$sector), "All")
 
 ui <- fluidPage(
   theme = bslib::bs_theme(bootswatch = "flatly"),
-  titlePanel(
-    "Data Breaches in History"
-  ),
+  titlePanel("Data Breaches in History"),
   sidebarLayout(
     sidebarPanel(
       # inputs
-      selectInput("Year", "Filter by Year", choices = unique(data$year), selected = 2024),
-      sliderInput("val_top", "Show the top n Records:", min = 1, max = 30, value = 10, step = 1),
+      selectInput(
+        "Year",
+        "Filter by Year",
+        choices = unique(data$year),
+        selected = 2024
+      ),
+      sliderInput(
+        "val_top",
+        "Show the top n Records:",
+        min = 1,
+        max = 30,
+        value = 10,
+        step = 1
+      ),
       
       # Data information when you hover etc.
       verbatimTextOutput("info"),
     ),
     mainPanel(
-      plotOutput("plot", width = "900px", height = "600px", click= "plot_click"),
-      verbatimTextOutput("summary"),
+      plotOutput(
+        "plot",
+        width = "900px",
+        height = "600px",
+        click = "plot_click"
+      ),
+      verbatimTextOutput("summary")
     )
   )
 )
 
+# server function 
 server <- function(input, output, session) {
   output$plot <- renderPlot({
-    
     data_plot <- data %>% filter(year == input$Year) %>%
       mutate(name = fct_reorder(organisation, records_lost_m)) %>%
       mutate(Rank = rank(-records_lost_m, ties.method = "average")) %>%
       arrange(Rank) %>%
       head(input$val_top)
     
-     ggplot(data_plot, aes(x=name, y=records_lost_m)) +
-      geom_segment( aes(x=name, xend=organisation, y=0, yend=records_lost_m)) +
-      geom_point(size=4, alpha=0.6, color="orange") +
+    ggplot(data_plot, aes(x = name, y = records_lost_m)) +
+      geom_segment(aes(
+        x = name,
+        xend = organisation,
+        y = 0,
+        yend = records_lost_m
+      )) +
+      geom_point(size = 4,
+                 alpha = 0.6,
+                 color = "orange") +
       scale_y_log10(labels = label_number()) +
       labs(title = "Data Breach Overview", x = "Organisations", y = "Records Lost (in millions)") +
       coord_flip() +
-      theme_gray() 
+      theme_gray()
   }, res = 96)
   
+  # Output the summary
   output$info <- renderText({
-    ranked_data <- data %>% filter(year == input$Year) %>% 
+    ranked_data <- data %>% filter(year == input$Year) %>%
       mutate(name = fct_reorder(organisation, records_lost_m)) %>%
-      mutate(Rank = rank(-records_lost_m, ties.method = "average")) %>% 
+      mutate(Rank = rank(-records_lost_m, ties.method = "average")) %>%
       # sort by rank
       arrange(Rank) %>%
       # get ranks 1-10
@@ -110,22 +133,32 @@ server <- function(input, output, session) {
     
     # Create a text representation of the top 10
     top_10_text <- ranked_data %>%
-      mutate(Info = paste(Rank, ": ", name, " - Records Lost (in Millions): ", records_lost_m)) %>%
+      mutate(Info = paste(
+        Rank,
+        ": ",
+        name,
+        " - Records Lost (in Millions): ",
+        records_lost_m
+      )) %>%
       pull(Info) %>%
       paste(collapse = "\n")
     
     # Combine with the default value
     paste0(
-      "Year: ", input$Year,  "\n",
-      "Total Records Lost (in Millions): ", sum(ranked_data$records_lost_m), "\n\n",
-      "Top 10 Rankings:\n", top_10_text
+      "Year: ",
+      input$Year,
+      "\n",
+      "Total Records Lost (in Millions): ",
+      sum(ranked_data$records_lost_m),
+      "\n\n",
+      "Top 10 Rankings:\n",
+      top_10_text
     )
   })
   
 }
 
-shinyApp(ui, server)
-
-
+# Run the application
+runApp(list(ui = ui, server = server), launch.browser = TRUE)
 
 ```
