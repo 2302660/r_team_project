@@ -105,6 +105,18 @@ ui <- fluidPage(
 # server function 
 server <- function(input, output, session) {
   
+  # Reactive expression to calculate max records for current selected years
+  max_records <- reactive({
+    data %>% filter(year %in% input$Years) %>% nrow()
+  })
+  
+  # Observes changes in selected years and update the sliderInput
+  observe({
+    max_recs <- max(1, max_records())
+    updateSliderInput(session, "val_top", max = max_recs, value = min(input$val_top, max_recs))
+  })
+
+  
   output$plot <- renderPlot({
     # Filter data for the selected years
     data_plot <- data %>% filter(year %in% input$Years)
