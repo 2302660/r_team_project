@@ -1,2 +1,0 @@
-"0","dj <- select(dj, `Effective Date`, `Close Value`)"
-"0","head(dj)"

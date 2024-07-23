@@ -35,6 +35,9 @@ data <- data %>%
 # Format numbers to avoid scientific notation and append 'M' suffix
 data <- data %>%
   mutate(records_lost = format(records_lost, scientific = FALSE))
+
+# Ensure records_lost is numeric
+data$records_lost <- as.numeric(data$records_lost)
 ```
 
 ```{r}
@@ -63,7 +66,15 @@ ui <- fluidPage(
         choices = unique(data$sector),
         selected = NULL,
         multiple = TRUE
+      ),
+      ######### Add radioButtons for scale #########
+      radioButtons(
+        "scale_type",
+        "Scale Type",
+        choices = list("Linear" = "linear", "Logarithmic" = "log"),
+        selected = "linear"
       )
+      ###############################################
     ),
     mainPanel(
       plotlyOutput("bubblePlot", height = "450px"),
@@ -73,6 +84,7 @@ ui <- fluidPage(
     )
   )
 )
+
 ```
 
 ```{r}
@@ -140,6 +152,11 @@ server <- function(input, output, session) {
         legend.box.margin = margin(10, 10, 10, 10)  # Adjust the margin around the legend
       )
     
+    if (input$scale_type == "log") {
+      p <- p + scale_y_log10(labels = scales::comma)
+    } else {
+      p <- p + scale_y_continuous(labels = scales::comma)
+    }
     
     ggplotly(p, tooltip = "text") %>%
       layout(hoverlabel = list(align = "left"))
@@ -206,5 +223,4 @@ server <- function(input, output, session) {
 # Run the application
 runApp(list(ui = ui, server = server), launch.browser = TRUE)
 ```
-
 
