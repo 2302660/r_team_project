@@ -46,7 +46,7 @@ ui <- fluidPage(
             font-size: 18px;
         }
     ")),
-  titlePanel("Data Breach Analysis Portal"),
+  titlePanel("Data Breaches & Hacks Analysis"),
   
   sidebarLayout(
     sidebarPanel(
@@ -58,9 +58,9 @@ ui <- fluidPage(
         multiple = TRUE
       ),
       selectInput(
-        "organisation",
-        "Organisation",
-        choices = unique(data$organisation),
+        "sector",
+        "Sector",
+        choices = unique(data$sector),
         selected = NULL,
         multiple = TRUE
       )
@@ -80,9 +80,9 @@ ui <- fluidPage(
 server <- function(input, output, session) {
   # Reactive function to filter data based on selections
   filteredData <- reactive({
-    req(input$year, input$organisation)
+    req(input$year, input$sector)
     data %>%
-      filter(year %in% input$year, organisation %in% input$organisation) %>%
+      filter(year %in% input$year, sector %in% input$sector) %>%
       mutate(id = row_number())  # Add a unique identifier for each row
   })
   
@@ -113,7 +113,7 @@ server <- function(input, output, session) {
         )
       ), alpha = 0.5, na.rm = TRUE) +
       scale_x_continuous(breaks = seq(min(data$year), max(data$year), by = 1)) +
-      labs(title = "Trends in Data Breaches Over Time", x = "Year", y = "Records Lost (in Millions)") +
+      labs(title = "Trends in Data Breaches & Hacks Over Time", x = "Year", y = "Records Lost (in Millions)") +
       theme_gray() +
       theme(
         plot.title = element_text(
