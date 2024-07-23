@@ -1,0 +1,6 @@
+"0","# Rename these columns to date and close_value using mutate"
+"0","dj <- dj %>% mutate(date = as.Date(`Effective Date`, format = ""%m/%d/%Y""), close_value = `Close Value`) %>%"
+"0","      select(date, close_value)"
+"0",""
+"0","# Display the initial rows to confirm the correct selection and renaming of the columns"
+"0","head(dj)"

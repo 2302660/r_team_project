@@ -1,0 +1,5 @@
+"0","library(tidyverse)"
+"0","library(readxl)"
+"0","dj <- read_xls(""dja-performance-report-monthly.xls"", skip = 5, n_max = 1530)"
+"0",""
+"0","head(dj)"

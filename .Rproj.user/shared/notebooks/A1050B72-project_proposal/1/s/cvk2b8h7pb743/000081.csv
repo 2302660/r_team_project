@@ -1,0 +1,29 @@
+"0","# Load the data"
+"0","breaches <- read_csv(""dataset/IIB Data Breaches - LATEST - breaches.csv"", skip = 1)"
+"1","[38;5;232mNew names:
+[36m•[38;5;232m `` -> `...2`
+[36m•[38;5;232m `` -> `...5`
+[36m•[38;5;232m `` -> `...6`
+[36m•[38;5;232m `` -> `...9`
+[36m•[38;5;232m `` -> `...11`
+[36m•[38;5;232m `` -> `...12`
+[36m•[38;5;232m `` -> `...13`
+[36m•[38;5;232m `` -> `...14`
+[36m•[38;5;232m `` -> `...15`
+[36m•[38;5;232m `` -> `...16`[39m
+"
+"1","[1mRows: [22m[34m488[39m [1mColumns: [22m[34m16[39m
+"
+"1","[36m──[39m [1mColumn specification[22m [36m────────────────────────────────────────────────────────────────────────────────────[39m
+[1mDelimiter:[22m "",""
+[31mchr[39m (12): visualisation here: https://informationisbeautiful.net/visualizations/worlds-biggest-data-brea...
+[32mdbl[39m  (3): year story broke, 1. Just email address/Online information 
+2 SSN/Personal details 
+3 Credit...
+[33mlgl[39m  (1): ...12
+"
+"1","
+[36mℹ[39m Use `spec()` to retrieve the full column specification for this data.
+[36mℹ[39m Specify the column types or set `show_col_types = FALSE` to quiet this message.
+"
+"0","head(breaches)"

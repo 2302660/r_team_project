@@ -1,0 +1,6 @@
+"0","# Arrange the data by date in ascending order by year "
+"0","breaches <- breaches %>%"
+"0","  group_by(method, `data sensitivity`) %>%"
+"0","  arrange(year)"
+"0",""
+"0","head(breaches)"

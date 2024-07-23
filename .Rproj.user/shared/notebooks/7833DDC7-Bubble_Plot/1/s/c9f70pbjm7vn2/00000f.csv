@@ -1,0 +1,7 @@
+"0","# Convert 'records_lost' to millions and round to 2 decimal places"
+"0","data <- data %>%"
+"0","  mutate(records_lost = round(records_lost / 1e6, 2))"
+"0",""
+"0","# Format numbers to avoid scientific notation and append 'M' suffix"
+"0","data <- data %>%"
+"0","  mutate(records_lost = format(records_lost, scientific = FALSE))"
