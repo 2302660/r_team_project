@@ -53,7 +53,7 @@ ui <- fluidPage(
       selectInput(
         "year",
         "Year",
-        choices = unique(data$year),
+        choices = sort(unique(data$year), decreasing = TRUE),
         selected = NULL,
         multiple = TRUE
       ),
