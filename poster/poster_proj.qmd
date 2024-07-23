@@ -1,6 +1,6 @@
 ---
 title: "Visualizing World’s Biggest Data Breaches and Hacks Over Time (2004 - 2024)"
-bibliography: references.bib 
+
 format:
   poster-typst: 
     size: "36x24"
@@ -11,20 +11,22 @@ format:
     footer-emails: "Team 09"
     footer-color: "F75D59"
     footer-text-color: "FFFFFF"
-    
 ---
+
 # Introduction 
-The surge in digital data transmission has amplified the susceptibility of information systems to security breaches. Our project utilizes the dataset from Information is Beautiful [@McCandlessEvans2024] on the world’s biggest data breaches to augment the existing visualization.
+The surge in digital data transmission has amplified the susceptibility of information systems to security breaches. Our project utilizes the dataset from Information is Beautiful[^1] on the world’s biggest data breaches to augment the existing visualization.
 
 The dataset provides awareness of the scale and impact of data breaches across various sectors and organizations and highlights the importance of data security for businesses and individuals.
 
 We plan to add features to the visualization, normalize the data and run comparative analyses, and develop models to predict future breaches. Our objective is to transform this visualization into a more dynamic and analytical tool that not only reflects previous data breaches but also provides insights into potential future trends.
 
-The dataset is obtained from Information is Beautiful [@McCandlessEvans2024], which contains information on the world’s biggest data breaches. The dataset includes the date of the breach, the organization involved, the method of the breach, the number of records lost, the sector of the organization and more.
+The dataset is obtained from Information is Beautiful, which contains information on the world’s biggest data breaches. The dataset includes the date of the breach, the organization involved, the method of the breach, the number of records lost, the sector of the organization and more.
+
+[^1]: T. E. David McCandless, “World’s Biggest Data Breaches, information is beautiful”. [Online]. Available: [https://informationisbeautiful.net/visualizations/worlds-biggest-data-breaches-hacks/](https://informationisbeautiful.net/visualizations/worlds-biggest-data-breaches-hacks/)
 
 # Previous Visualization
 
-![This bubble chart illustrates the scale and impact of major global data breaches, categorized by the organization and number of records lost, published by Information is Beautiful. [@McCandlessEvans2024]](./images/original_visualization.png){width=100%} 
+![This bubble chart illustrates the scale and impact of major global data breaches, categorized by the organization and number of records lost, published by Information is Beautiful.](./images/original_visualization.png){width=100%} 
 
 # Strengths
 
