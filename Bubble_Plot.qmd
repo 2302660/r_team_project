@@ -67,14 +67,14 @@ ui <- fluidPage(
         selected = NULL,
         multiple = TRUE
       ),
-      ######### Add radioButtons for scale #########
+      
       radioButtons(
         "scale_type",
         "Scale Type",
         choices = list("Linear" = "linear", "Logarithmic" = "log"),
-        selected = "linear"
+        selected = "log"
       )
-      ###############################################
+     
     ),
     mainPanel(
       plotlyOutput("bubblePlot", height = "450px"),
@@ -106,7 +106,7 @@ server <- function(input, output, session) {
         year,
         records_lost,
         fill = method,
-        size = data_sensitivity,
+        
         customdata = id
       )
     ) +
@@ -123,7 +123,7 @@ server <- function(input, output, session) {
           "<br><b>Data Sensitivity:</b> ",
           data_sensitivity
         )
-      ), alpha = 0.5, na.rm = TRUE) +
+      ), alpha = 0.5, na.rm = TRUE, size = 10) +
       scale_x_continuous(breaks = seq(min(data$year), max(data$year), by = 1)) +
       labs(title = "Trends in Data Breaches & Hacks Over Time", x = "Year", y = "Records Lost (in Millions)") +
       theme_gray() +
@@ -223,4 +223,3 @@ server <- function(input, output, session) {
 # Run the application
 runApp(list(ui = ui, server = server), launch.browser = TRUE)
 ```
-
