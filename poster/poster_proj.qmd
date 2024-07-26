@@ -1,5 +1,5 @@
 ---
-title: "Visualizing World’s Biggest Data Breaches and Hacks Over Time (2004 - 2024)"
+title: "Visualizing World’s Biggest Data Breaches and Hacks Over Time"
 
 format:
   poster-typst: 
