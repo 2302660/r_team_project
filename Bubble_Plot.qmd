@@ -123,7 +123,7 @@ server <- function(input, output, session) {
           "<br><b>Data Sensitivity:</b> ",
           data_sensitivity
         )
-      ), alpha = 0.5, na.rm = TRUE, size = 10) +
+      ), alpha = 0.5, na.rm = TRUE, size = 5) +
       scale_x_continuous(breaks = seq(min(data$year), max(data$year), by = 1)) +
       labs(title = "Trends in Data Breaches & Hacks Over Time", x = "Year", y = "Records Lost (in Millions)") +
       theme_gray() +

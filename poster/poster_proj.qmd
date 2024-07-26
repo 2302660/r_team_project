@@ -20,13 +20,13 @@ The dataset provides awareness of the scale and impact of data breaches across v
 
 We plan to add features to the visualization, normalize the data and run comparative analyses, and develop models to predict future breaches. Our objective is to transform this visualization into a more dynamic and analytical tool that not only reflects previous data breaches but also provides insights into potential future trends.
 
-The dataset is obtained from Information is Beautiful, which contains information on the world’s biggest data breaches. The dataset includes the date of the breach, the organization involved, the method of the breach, the number of records lost, the sector of the organization and more.
+The dataset contains information on the world’s biggest data breaches which includes the date of the breach, the organization involved, the method of the breach, the number of records lost, the sector of the organization and more.
 
 [^1]: T. E. David McCandless, “World’s Biggest Data Breaches, information is beautiful”. [Online]. Available: [https://informationisbeautiful.net/visualizations/worlds-biggest-data-breaches-hacks/](https://informationisbeautiful.net/visualizations/worlds-biggest-data-breaches-hacks/)
 
 # Previous Visualization
 
-![This bubble chart illustrates the scale and impact of major global data breaches, categorized by the organization and number of records lost, published by Information is Beautiful.](./images/original_visualization.png){width=100%} 
+![This bubble chart illustrates the scale and impact of major global data breaches, categorized by the organization and number of records lost, published by Information is Beautiful.](./images/original_visualization.png){width=72%} 
 
 # Strengths
 
@@ -70,7 +70,16 @@ We used the Quarto publication framework and the R programming language, along w
 
 # Improved Visualization
 
+![This bubble plot is an improved version of the original visualization.](./images/Improved_Plot.png){width=100%}
+
+The improved visualization significantly enhances clarity and detail. It uses a bubble chart format, with bubble sizes corresponding to records lost and colors denoting breach methods, providing an intuitive understanding of data breach impacts and causes. The comprehensive legend and organized layout make the chart more aesthetically appealing and easier to interpret quickly and accurately compared to the original.
 
 # Visualization (Interactive)
 
+![This is an interactive bubble plot of the improved visualization.](./images/Interactive_Plot.png){width=100%}
+
+This interactive plot allows users to explore data by hovering over bubbles for details, filtering by year and sector, and toggling between linear and logarithmic scales for records lost. The plot is color-coded by breach method, with a legend for reference, and users can click on bubbles to view detailed information about each breach.
+
 # Conclusion
+
+In conclusion, the improved visualization offers a more comprehensive and user-friendly representation of the world’s biggest data breaches. With interactive features and advanced filtering options capabilities, it provides valuable insights into the scale, impact, and trends of data breaches over time. The enhanced clarity and interactivity make it a powerful tool for understanding and analysing data breaches, enabling users to identify patterns, correlations, and potential risk factors in data security.
