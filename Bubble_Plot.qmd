@@ -105,7 +105,7 @@ server <- function(input, output, session) {
       aes(
         year,
         records_lost,
-        fill = method,
+        fill = breach_method,
         
         customdata = id
       )
@@ -118,8 +118,8 @@ server <- function(input, output, session) {
           organisation,
           "<br><b>Records Lost (in Millions):</b>",
           records_lost,
-          "<br><b>Method:</b> ",
-          method,
+          "<br><b>Breach Method:</b> ",
+          breach_method,
           "<br><b>Data Sensitivity:</b> ",
           data_sensitivity
         )
@@ -196,7 +196,7 @@ server <- function(input, output, session) {
               selected_point$records_lost,
               "<br>",
               "<b>Method:</b> &nbsp;&nbsp;",
-              selected_point$method,
+              selected_point$breach_method,
               "<br>",
               "<b>Data Sensitivity:</b> &nbsp;&nbsp;",
               selected_point$data_sensitivity,
