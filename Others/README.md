@@ -1,1 +1,0 @@
-# r_team_project
