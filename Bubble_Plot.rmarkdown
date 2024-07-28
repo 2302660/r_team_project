@@ -127,6 +127,7 @@ server <- function(input, output, session) {
       ), alpha = 0.5, na.rm = TRUE, size = 5) +
       scale_x_continuous(breaks = seq(min(data$year), max(data$year), by = 1)) +
       labs(title = "Trends in Data Breaches & Hacks Over Time", x = "Year", y = "Records Lost (in Millions)") +
+      guides(fill = guide_legend(title = "Breach Method")) +
       theme_gray() +
       theme(
         plot.title = element_text(
