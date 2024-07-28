@@ -5,13 +5,12 @@ format:
   html: 
     embed-resources: true
     page-layout: full
+    runtime: shiny
     
 knitr:
   opts_chunk:
     message: false
     warning: false
-    
-runtime: shiny
 ---
 
 ```{r}
@@ -41,6 +40,7 @@ data$records_lost <- as.numeric(data$records_lost)
 ```
 
 ```{r}
+
 # Define UI
 ui <- fluidPage(
   theme = shinytheme("superhero"),
@@ -57,14 +57,14 @@ ui <- fluidPage(
         "year",
         "Year",
         choices = sort(unique(data$year), decreasing = TRUE),
-        selected = NULL,
+        selected = c(2020, 2021, 2022, 2023, 2024),
         multiple = TRUE
       ),
       selectInput(
         "sector",
         "Sector",
         choices = unique(data$sector),
-        selected = NULL,
+        selected = c("government", "finance"),
         multiple = TRUE
       ),
       
@@ -88,6 +88,7 @@ ui <- fluidPage(
 ```
 
 ```{r}
+
 # Define server logic
 server <- function(input, output, session) {
   # Reactive function to filter data based on selections
