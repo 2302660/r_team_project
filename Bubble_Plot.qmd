@@ -195,7 +195,7 @@ server <- function(input, output, session) {
               "<b>Records Lost (in Millions):</b> &nbsp;&nbsp;",
               selected_point$records_lost,
               "<br>",
-              "<b>Method:</b> &nbsp;&nbsp;",
+              "<b>Breach Method:</b> &nbsp;&nbsp;",
               selected_point$breach_method,
               "<br>",
               "<b>Data Sensitivity:</b> &nbsp;&nbsp;",

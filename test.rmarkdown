@@ -1,0 +1,273 @@
+``` {r}
+library(tidyverse)
+library(shiny)
+library(scales)
+library(plotly)
+library(RColorBrewer)
+library(viridis)
+library(DT)
+```
+
+``` {r}
+# Load data
+data <- read_csv("dataset/cleaned_breaches.csv")
+
+```
+
+``` {r}
+
+#remove commas
+data$`records_lost` <- gsub(",", "", data$`records_lost`)
+data$`records_lost` <- gsub(";", "", data$`records_lost`)
+
+# convert chr to numeric
+data$`records_lost` <- as.integer(data$`records_lost`)
+
+# mutate match month.abb with data$month into a new column
+data <- data %>% mutate(month.abb = match(data$month, month.abb))
+data <- data %>% mutate(records_lost_m = `records_lost` / 1000000)
+data <- data %>% mutate(records_lost_k = `records_lost` / 1000)
+
+# identify duplicates and append the year to duplicates
+data <- data %>%
+  group_by(organisation) %>%
+  mutate(dup = n() > 1,
+         unique_org_year = ifelse(dup, paste(organisation, year, sep = "_"), organisation)) %>%
+  ungroup()
+
+head(data)
+
+data_2024 <- data %>% filter(year == 2024)
+
+head(data_2024)
+
+```
+
+``` {r}
+
+head(data_2024)
+
+data_2024 <- data_2024 %>%
+  mutate(name = fct_reorder(organisation, records_lost_m)) # to order the data in the graph
+
+ggplot(data_2024, aes(x = name, y = records_lost_m)) +
+  geom_segment(aes(
+    x = name,
+    xend = organisation,
+    y = 0,
+    yend = records_lost_m
+  )) +
+  geom_point(size = 4,
+             alpha = 0.6,
+             color = "orange") +
+  scale_y_log10(labels = label_number()) +
+  coord_flip() +
+  theme_gray()
+
+```
+
+``` {r}
+
+# SHINY APP
+sectorFilter <- c(unique(data$sector), "telecoms")
+
+ui <- fluidPage(
+  theme = bslib::bs_theme(bootswatch = "flatly"),
+  titlePanel("Data Breaches in History"),
+  tags$head(
+    tags$style(HTML("
+      .title-underline {
+        text-decoration: underline; 
+        font-weight: bold; 
+        margin-bottom: 20px; 
+      }
+    "))
+  ),
+  sidebarLayout(
+    sidebarPanel(
+      selectInput(
+        "Years",
+        "Filter by Years",
+        choices = sort(unique(data$year), decreasing = TRUE),
+        selected = c(2024),
+        multiple = TRUE
+      ),
+      selectInput(
+        "Sector",
+        "Filter by Sector",
+        choices = c("telecoms", unique(data$sector)),
+        selected = "telecoms",
+        multiple = TRUE
+      ),
+      sliderInput(
+        "val_top",
+        "Show the top n Records:",
+        min = 1,
+        max = 30,
+        value = 10,
+        step = 1
+      ),
+      verbatimTextOutput("info")
+    ),
+    mainPanel(
+      plotlyOutput(
+        "plot",
+        width = "900px",
+        height = "600px"
+      ),
+      fluidRow(
+        column(12,
+               div(class = "title-underline",
+                   h4("Top Rankings:")  # Underline the title
+               ),
+               div(DTOutput("table")
+               )
+        )
+      )
+    )
+  )
+)
+
+server <- function(input, output, session) {
+  
+  max_records <- reactive({
+    filtered_data <- data %>% filter(year %in% input$Years)
+    if (!("All" %in% input$Sector)) {
+      filtered_data <- filtered_data %>% filter(sector %in% input$Sector)
+    }
+    filtered_data %>% nrow()
+  })
+  
+  observe({
+    max_recs <- max(1, max_records())
+    updateSliderInput(session, "val_top", max = max_recs, value = min(input$val_top, max_recs))
+  })
+
+  custom_colors <- viridis::viridis(20)  # Generates 20 distinct colors
+
+  output$plot <- renderPlotly({
+    data_plot <- data %>% filter(year %in% input$Years)
+    if (!("All" %in% input$Sector)) {
+      data_plot <- data_plot %>% filter(sector %in% input$Sector)
+    }
+    
+    top_n_combined <- data_plot %>%
+      mutate(name = fct_reorder(unique_org_year, records_lost_m)) %>%
+      mutate(Rank = rank(-records_lost_m, ties.method = "average")) %>%
+      arrange(Rank) %>%
+      group_by(year) %>%
+      slice_head(n = input$val_top) %>%
+      ungroup() %>%
+      arrange(-records_lost_m) %>%
+      slice_head(n = input$val_top)
+
+    # Define custom colors for each year
+    color_palette <- viridis::viridis(length(unique(top_n_combined$year)))
+    year_colors <- setNames(color_palette, unique(top_n_combined$year))
+    
+    p <- plot_ly()
+    
+    for (year in unique(top_n_combined$year)) {
+      year_data <- top_n_combined %>% filter(year == !!year)
+      
+      p <- add_segments(p,
+        x = 0, xend = year_data$records_lost_m,
+        y = year_data$name, yend = year_data$name,
+        line = list(color = "gray", width = 2),  
+        legendgroup = as.character(year),
+        showlegend = FALSE
+      )
+    }
+
+    p <- add_trace(p, data = top_n_combined,
+      x = ~records_lost_m, y = ~name, type = 'scatter', mode = 'markers',
+      color = ~factor(year),  
+      colors = year_colors,  
+      marker = list(
+        size = 15  
+      ),
+      hoverinfo = 'text',
+      text = ~paste(
+        "Organisation: ", name, "<br>",
+        "Records Lost (in millions): ", records_lost_m, "<br>",
+        "Year: ", year, "<br>",
+        "Breach Method: ", method  
+      ),
+      legendgroup = ~factor(year),
+      showlegend = TRUE
+    )
+
+    p %>%
+      layout(title = "Data Breach Overview",
+             xaxis = list(title = "Records Lost (in millions)", type = "log", tickformat = ".0f"),
+             yaxis = list(title = "Organisations"),
+             showlegend = TRUE)  
+  })
+  
+  output$table <- renderDT({
+    data_plot <- data %>% filter(year %in% input$Years)
+    if (!("All" %in% input$Sector)) {
+      data_plot <- data_plot %>% filter(sector %in% input$Sector)
+    }
+    
+    top_n_combined <- data_plot %>%
+      mutate(name = fct_reorder(unique_org_year, records_lost_m)) %>%
+      mutate(Rankings = rank(-records_lost_m, ties.method = "average")) %>%
+      arrange(Rankings) %>%
+      group_by(year) %>%
+      slice_head(n = input$val_top) %>%
+      ungroup() %>%
+      arrange(-records_lost_m) %>%
+      slice_head(n = input$val_top)
+
+    top_n_combined %>%
+      select(Rankings, Organisation = name, `Records Lost (in Millions)` = records_lost_m, Year = year, `Breach Method` = method) %>%
+      arrange(Rankings) %>%
+      datatable(options = list(pageLength = 10, autoWidth = TRUE))
+  })
+  
+  output$info <- renderText({
+    data_plot <- data %>% filter(year %in% input$Years)
+    if (!("All" %in% input$Sector)) {
+      data_plot <- data_plot %>% filter(sector %in% input$Sector)
+    }
+    
+    top_n_combined <- data_plot %>%
+      mutate(name = fct_reorder(unique_org_year, records_lost_m)) %>%
+      mutate(Rank = rank(-records_lost_m, ties.method = "average")) %>%
+      arrange(Rank) %>%
+      group_by(year) %>%
+      slice_head(n = input$val_top) %>%
+      ungroup() %>%
+      arrange(-records_lost_m) %>%
+      slice_head(n = input$val_top)
+
+    sorted_years <- sort(input$Years)
+    
+    top_text <- top_n_combined %>%
+      mutate(Info = paste(
+        Rank,
+        ": ",
+        name,
+        " - Records Lost (in Millions): ",
+        records_lost_m,
+        " - Year: ",
+        year
+      )) %>%
+      pull(Info) %>%
+      paste(collapse = "\n")
+    
+    paste0(
+      "Years: ",
+      paste(sorted_years, collapse = ", "),
+      "\n",
+      "Total Records Lost (in Millions): ",
+      sum(top_n_combined$records_lost_m)
+    )
+  })
+}
+
+# Run the application
+runApp(list(ui = ui, server = server), launch.browser = TRUE)
+
+```
