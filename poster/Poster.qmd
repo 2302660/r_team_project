@@ -4,8 +4,8 @@ title: "Visualizing World’s Biggest Data Breaches and Hacks Over Time"
 format:
   poster-typst: 
     size: "36x24"
-    poster-authors: "Heng Yu Xin, Javier Si Zhao Hong, Tan Guan Hong, Hong Ziyang, Abdul Haliq Bin Abdul Rahim, See Toh Ming Xuan Axel"
-    departments: "ICT"
+    poster-authors: "Yu Xin, Javier, Guan Hong, Ziyang, Haliq, Axel"
+    departments: "Infocomm Technology"
     institution-logo: "./images/sit.png"
     footer-text: "AAI1001 — Data Engineering and Visualization AY23/24 Tri 3 Team Project"
     footer-emails: "Team 09"
