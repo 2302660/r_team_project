@@ -70,6 +70,8 @@ We used the Quarto publication framework and the R programming language, along w
 
 # Improved Visualization
 
+It is important to improve the visualization to enhance its clarity, interactivity, and analytical capabilities. The improved visualization will provide users with a more intuitive and informative representation of data breaches, enabling them to explore trends, patterns, and correlations more effectively.
+
 ![This bubble plot is an improved version of the original visualization.](./images/Improved_Plot.png){width=100%}
 
 The improved visualization significantly enhances clarity and detail. It uses a bubble chart format, with  colors denoting breach methods, providing an intuitive understanding of data breach impacts and causes. The comprehensive legend and organized layout make the chart more aesthetically appealing and easier to interpret quickly and accurately compared to the original.
