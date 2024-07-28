@@ -5,7 +5,10 @@ format:
   html: 
     embed-resources: true
     page-layout: full
+    toc: true
+    toc-depth: 2
     runtime: shiny
+    theme: cosmo
     
 knitr:
   opts_chunk:
@@ -13,18 +16,61 @@ knitr:
     warning: false
 ---
 
+::: {.lead .subtitle}
+**Visualizing World's Biggest Data Breaches and Hacks Over Time**
+:::
+
+::: {#authors_container}
+::: {#author-title}
+Authors
+:::
+
+1.  Heng Yu Xin 
+
+2.  Javier Si Zhao Hong 
+
+3.  Tan Guan Hong 
+
+4.  Hong Ziyang 
+
+5.  Abdul Haliq Bin Abdul Rahim 
+
+6.  See Toh Ming Xuan Axel 
+:::
+
+# Introduction
+
+Data breaches and hacks have become increasingly common in today's digital world. These incidents can have serious consequences for individuals, organizations, and society as a whole. In this document, we will create an interactive bubble plot using Shiny and Plotly to visualize trends in data breaches and hacks over time. The plot will allow users to explore the dataset by selecting specific years and sectors. Additionally, users can click on a point in the plot to view more details about the data breach or hack. This interactive plot will provide a user-friendly way to analyze and explore the dataset.
+
+# Load Libraries
+
+The following libraries are required for this document:
+
+
 ```{r}
 library(shiny)
 library(shinythemes)
 library(plotly)
 library(tidyverse)
 library(scales)
+library(knitr)
 ```
+
+
+# Read Data
+
+The dataset used in this document is available has been cleaned and transformed during the proposal staged. It is available in the `dataset` folder. The dataset contains information about data breaches and hacks that have occurred over the years.
+
 
 ```{r}
 # Read data
 data <- read.csv("dataset/cleaned_breaches.csv")
 ```
+
+
+# Further Data Cleaning and Transformation
+
+The `records_lost` column in the dataset is in scientific notation. We will convert this column to millions and round to 2 decimal places. We will also format the numbers to avoid scientific notation.
 
 ```{r}
 # Convert 'records_lost' to millions and round to 2 decimal places
@@ -37,7 +83,20 @@ data <- data %>%
 
 # Ensure records_lost is numeric
 data$records_lost <- as.numeric(data$records_lost)
+
+# Display the first few rows of the data
+kable(head(data), caption = "First few rows of the data")
 ```
+
+
+# Create Interactive Plot
+
+We will create an interactive bubble plot that shows trends in data breaches and hacks over time. 
+
+## Creating the UI with Shiny.
+
+In the UI, we will create a sidebar layout with input controls for selecting the year and sector. We will also include a radio button to select the scale type (linear or logarithmic) for the y-axis. The main panel will display the interactive bubble plot and a display area for more details when a point is clicked.
+
 
 ```{r}
 
@@ -86,6 +145,12 @@ ui <- fluidPage(
 )
 
 ```
+
+
+## Creating the Server Logic
+
+In the server logic, we will define a reactive function to filter the data based on the selected year and sector. We will then generate the bubble plot using ggplot2 and render it using plotly. We will also capture and display the details of a clicked point in the plot.
+
 
 ```{r}
 
@@ -221,8 +286,17 @@ server <- function(input, output, session) {
 }
 ```
 
+
+# Run the Application
+
+Finally, we will run the application using the `runApp()` function.
+
 ```{r}
 # Run the application
 runApp(list(ui = ui, server = server), launch.browser = TRUE)
 ```
 
+
+# Conclusion
+
+In this document, we created an interactive bubble plot using Shiny and Plotly to visualize trends in data breaches and hacks over time. The plot allows users to select specific years and sectors to explore the data. Additionally, users can click on a point in the plot to view more details about the data breach or hack. This interactive plot provides a user-friendly way to analyse and explore the dataset.
