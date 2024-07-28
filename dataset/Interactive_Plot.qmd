@@ -1,0 +1,227 @@
+---
+title: "Bubble Plot"
+
+format: 
+  html: 
+    embed-resources: true
+    page-layout: full
+    runtime: shiny
+    
+knitr:
+  opts_chunk:
+    message: false
+    warning: false
+---
+
+```{r}
+library(shiny)
+library(shinythemes)
+library(plotly)
+library(tidyverse)
+library(scales)
+```
+
+```{r}
+# Read data
+data <- read.csv("dataset/cleaned_breaches.csv")
+```
+
+```{r}
+# Convert 'records_lost' to millions and round to 2 decimal places
+data <- data %>%
+  mutate(records_lost = round(records_lost / 1e6, 2))
+
+# Format numbers to avoid scientific notation and append 'M' suffix
+data <- data %>%
+  mutate(records_lost = format(records_lost, scientific = FALSE))
+
+# Ensure records_lost is numeric
+data$records_lost <- as.numeric(data$records_lost)
+```
+
+```{r}
+
+# Define UI
+ui <- fluidPage(
+  theme = shinytheme("superhero"),
+  tags$style(HTML("
+        .control-label {
+            font-size: 18px;
+        }
+    ")),
+  titlePanel("Data Breaches & Hacks Analysis"),
+  
+  sidebarLayout(
+    sidebarPanel(
+      selectInput(
+        "year",
+        "Year",
+        choices = sort(unique(data$year), decreasing = TRUE),
+        selected = c(2020, 2021, 2022, 2023, 2024),
+        multiple = TRUE
+      ),
+      selectInput(
+        "sector",
+        "Sector",
+        choices = unique(data$sector),
+        selected = c("government", "finance"),
+        multiple = TRUE
+      ),
+      
+      radioButtons(
+        "scale_type",
+        "Scale Type",
+        choices = list("Linear" = "linear", "Logarithmic" = "log"),
+        selected = "log"
+      )
+     
+    ),
+    mainPanel(
+      plotlyOutput("bubblePlot", height = "450px"),
+      HTML("<h3 style='color: orange;'><b>More Details:</b></h3>"),
+      # Title for the display area
+      htmlOutput("detailPanel")  # Output area for clicked point details
+    )
+  )
+)
+
+```
+
+```{r}
+
+# Define server logic
+server <- function(input, output, session) {
+  # Reactive function to filter data based on selections
+  filteredData <- reactive({
+    req(input$year, input$sector)
+    data %>%
+      filter(year %in% input$year, sector %in% input$sector) %>%
+      mutate(id = row_number())  # Add a unique identifier for each row
+  })
+  
+  # Generate plot output
+  output$bubblePlot <- renderPlotly({
+    p <- ggplot(
+      filteredData(),
+      aes(
+        year,
+        records_lost,
+        fill = breach_method,
+        
+        customdata = id
+      )
+    ) +
+      geom_point(aes(
+        text = paste(
+          "<br><b>Year:</b> ",
+          year,
+          "<br><b>Organisation:</b> ",
+          organisation,
+          "<br><b>Records Lost (in Millions):</b>",
+          records_lost,
+          "<br><b>Breach Method:</b> ",
+          breach_method,
+          "<br><b>Data Sensitivity:</b> ",
+          data_sensitivity
+        )
+      ), alpha = 0.5, na.rm = TRUE, size = 5) +
+      scale_x_continuous(breaks = seq(min(data$year), max(data$year), by = 1)) +
+      labs(title = "Trends in Data Breaches & Hacks Over Time", x = "Year", y = "Records Lost (in Millions)") +
+      guides(fill = guide_legend(title = "Breach Method")) +
+      theme_gray() +
+      theme(
+        plot.title = element_text(
+          size = 20,
+          face = "bold",
+          family = "Arial"
+        ),
+        # Title size & font
+        axis.title.x = element_text(size = 14, margin = margin(15, 0, 15, 0)),
+        # X-axis title size and margin
+        axis.title.y = element_text(size = 14, margin = margin(0, 15, 0, 15)),
+        # Y-axis title size and margin,
+        axis.text.x = element_text(size = 10),
+        # X-axis text size
+        axis.text.y = element_text(size = 10),
+        # Y-axis text size
+        legend.title = element_text(face = "bold", size = 12),
+        # Adjust the size of the legend title
+        legend.text = element_text(size = 10),
+        # Adjust the size of the legend text
+        legend.key.size = unit(10, "cm"),
+        # Adjust the size of the legend keys
+        legend.background = element_rect(fill = "white", colour = "darkblue"),
+        legend.box.margin = margin(10, 10, 10, 10)  # Adjust the margin around the legend
+      )
+    
+    if (input$scale_type == "log") {
+      p <- p + scale_y_log10(labels = scales::comma)
+    } else {
+      p <- p + scale_y_continuous(labels = scales::comma)
+    }
+    
+    ggplotly(p, tooltip = "text") %>%
+      layout(hoverlabel = list(align = "left"))
+  })
+  
+  # Capture and display click information
+  observeEvent(event_data("plotly_click"), {
+    click_data <- event_data("plotly_click")
+    if (is.null(click_data)) {
+      output$detailPanel <- renderUI("Click on a point to see details.")
+    } else {
+      # Extract the custom data (unique ID) from the click event
+      clicked_id <- click_data$customdata
+      
+      df <- filteredData()
+      
+      # Find the row corresponding to the clicked ID
+      selected_point <- df %>% filter(id == clicked_id)
+      
+      if (nrow(selected_point) == 1) {
+        output$detailPanel <- renderUI({
+          HTML(
+            paste0(
+              "<div style='border: 3px solid #ccc; padding: 10px; border-radius: 10px; width: 850px; font-size: 16px;'>",
+              "<b>Year:</b> &nbsp;&nbsp;",
+              selected_point$year,
+              "&nbsp;&nbsp;&nbsp;&nbsp; <b>Month:</b> &nbsp;&nbsp;",
+              selected_point$month,
+              "<br>",
+              "<b>Organisation:</b> &nbsp;&nbsp;",
+              selected_point$organisation,
+              "<br>",
+              "<b>Sector:</b> &nbsp;&nbsp;",
+              selected_point$sector,
+              "<br>",
+              "<b>Records Lost (in Millions):</b> &nbsp;&nbsp;",
+              selected_point$records_lost,
+              "<br>",
+              "<b>Breach Method:</b> &nbsp;&nbsp;",
+              selected_point$breach_method,
+              "<br>",
+              "<b>Data Sensitivity:</b> &nbsp;&nbsp;",
+              selected_point$data_sensitivity,
+              "<br>",
+              "<b>Story:</b> &nbsp;&nbsp;",
+              selected_point$story,
+              "<br>",
+              "<b>Source:</b> &nbsp;&nbsp; <a href='",
+              selected_point$source_link,
+              "' target='_blank'>Link</a>",
+              "</div>"
+            )
+          )
+        })
+      } else {
+        output$detailPanel <- renderUI("Selected point not found in the filtered data.")
+      }
+    }
+  })
+}
+```
+
+```{r}
+# Run the application
+runApp(list(ui = ui, server = server), launch.browser = TRUE)
+```
