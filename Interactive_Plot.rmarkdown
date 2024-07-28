@@ -225,3 +225,4 @@ server <- function(input, output, session) {
 # Run the application
 runApp(list(ui = ui, server = server), launch.browser = TRUE)
 ```
+
