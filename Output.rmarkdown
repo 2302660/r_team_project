@@ -76,7 +76,7 @@ ui <- fluidPage(
       selectInput(
         "Years",
         "Filter by Years",
-        choices = unique(data$year),
+        choices = sort(unique(data$year), decreasing = TRUE),
         selected = c(2024),
         multiple = TRUE
       ),
